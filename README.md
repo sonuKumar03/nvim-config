@@ -9,7 +9,7 @@ gh repo clone sonuKumar03/nvim-config ~/.config/nvim
 nvim
 ```
 
-If you already have a local config, back it up first:
+If you already have a local config:
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.backup
@@ -28,26 +28,101 @@ nvim
 - `go`
 - `gh`
 
-## Reference
+## Daily Workflow
 
-| Area | Keys | Description |
-| --- | --- | --- |
-| Files | `<leader>e`, `<leader>E` | Neo-tree root and current-directory views |
-| Search | `<leader>ff`, `<leader>fg`, `<leader>fb`, `<leader>fh` | Telescope file, grep, buffer, and help pickers |
-| Buffers | `<leader>bn`, `<leader>bh`, `<leader>bl`, `<leader>bc` | Create, move, and close buffers |
-| Git | `<leader>gg`, `<leader>gf`, `<leader>gB` | Neogit, Fugitive status, and Fugitive blame |
-| Diff | `<leader>ga`, `<leader>gO`, `<leader>gA`, `<leader>gC`, `<leader>gF`, `<leader>gL`, `<leader>gH` | Diffview open/close and file history |
-| Replace | `<leader>sr`, `<leader>sR`, `<leader>sw`, `<leader>sA`, `<leader>sl` | Spectre project/file/visual replace |
-| Diagnostics | `<leader>xx`, `<leader>xX`, `<leader>xe`, `<leader>xE`, `<leader>xq`, `<leader>xl`, `<leader>xs`, `<leader>xr`, `<leader>xd` | Trouble diagnostics, quickfix, symbols, refs, defs |
-| Debug | `<leader>db`, `<leader>dB`, `<leader>dc`, `<leader>di`, `<leader>do`, `<leader>dO`, `<leader>dr`, `<leader>du`, `<leader>dt`, `<leader>dl` | DAP breakpoints, stepping, REPL, UI, last run |
-| Tests | `<leader>tr`, `<leader>tf`, `<leader>ts`, `<leader>td`, `<leader>tt`, `<leader>to`, `<leader>tO`, `<leader>tS` | Neotest run, debug, stop, output, summary |
-| Terminal | `<leader>ot` | ToggleTerm |
-| Tasks | `<leader>oo`, `<leader>oO`, `<leader>or` | Overseer open, toggle, run |
-| LeetCode | `<leader>lc`, `<leader>lr` | Open scratch buffer and run current Python file |
-| Tabs | `<leader>tn`, `<leader>th`, `<leader>tl`, `<leader>tc` | Tab open, previous, next, close |
-| Help | `<leader>?` | which-key |
+### Start Here
+
+- `<leader>?` shows keymaps with which-key
+- `<leader>ff` finds files
+- `<leader>fg` searches text across the project
+- `<leader>e` opens Neo-tree at the project root
+- `<leader>E` opens Neo-tree at the current directory
+
+### Files and Buffers
+
+- `<leader>bn` creates a new buffer
+- `<leader>bh` and `<leader>bl` move between buffers
+- `<leader>bc` closes the current buffer
+- `<leader>be` opens the Neo-tree buffers view
+- `barbar.nvim` shows open buffers as a tabline
+
+### Git
+
+- `<leader>gg` opens Neogit
+- `<leader>gf` opens Fugitive status
+- `<leader>gB` opens Fugitive blame
+- `<leader>ga` or `<leader>gO` opens Diffview
+- `<leader>gA` or `<leader>gC` closes Diffview
+- `<leader>gF` opens file history
+- `<leader>gL` or `<leader>gH` opens current-file history
+- `gitsigns` handles hunk staging, reset, preview, blame, and navigation
+
+### Search and Replace
+
+- `<leader>sr` opens Spectre for project-wide replace
+- `<leader>sR` opens Spectre for current-file replace
+- `<leader>sw` opens Spectre for a visual selection
+- `<leader>sA` applies the replacement
+- `<leader>sl` resumes the last Spectre search
+
+### Diagnostics
+
+- `<leader>xx` opens workspace diagnostics
+- `<leader>xX` opens buffer diagnostics
+- `<leader>xe` and `<leader>xE` filter to errors
+- `<leader>xq` opens quickfix
+- `<leader>xl` opens location list
+- `<leader>xs` opens symbols
+- `<leader>xr` opens references
+- `<leader>xd` opens definitions
+
+### Debug
+
+- `<leader>db` toggles a breakpoint
+- `<leader>dB` sets a conditional breakpoint
+- `<leader>dc` continues
+- `<leader>di` steps into
+- `<leader>do` steps over
+- `<leader>dO` steps out
+- `<leader>dr` opens the REPL
+- `<leader>du` toggles the DAP UI
+- `<leader>dt` terminates
+- `<leader>dl` reruns the last session
+
+### Tests
+
+- `<leader>tr` runs the nearest test
+- `<leader>tf` runs the current file
+- `<leader>ts` runs the suite
+- `<leader>td` debugs the nearest test
+- `<leader>tt` stops a running test
+- `<leader>to` opens test output
+- `<leader>tO` toggles the output panel
+- `<leader>tS` toggles the summary panel
+
+### Terminal and Tasks
+
+- `<leader>ot` toggles the terminal
+- `toggleterm.nvim` opens a horizontal split by default
+- `<leader>oo` opens Overseer
+- `<leader>oO` toggles Overseer
+- `<leader>or` runs an Overseer task
+
+### Tabs
+
+- `<leader>tn` opens a new tab
+- `<leader>th` moves to the previous tab
+- `<leader>tl` moves to the next tab
+- `<leader>tc` closes the current tab
+
+### LeetCode
+
+- `<leader>lc` opens a Python scratch buffer
+- `<leader>lr` runs the current Python file
 
 ## Notes
 
-- `lazy-lock.json` is committed to pin plugin versions.
+- `lazy-lock.json` pins plugin versions.
 - `nvim.log` is ignored.
+- This config is tuned for JS/TS, Python, Go, and Nx work.
+
