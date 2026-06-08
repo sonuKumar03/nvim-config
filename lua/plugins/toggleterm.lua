@@ -7,7 +7,6 @@ return {
 			"TermExec",
 		},
 		opts = {
-			open_mapping = [[<c-\>]],
 			direction = "horizontal",
 			shade_terminals = true,
 			start_in_insert = true,
