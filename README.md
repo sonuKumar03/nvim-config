@@ -49,6 +49,23 @@ Start Neovim once to bootstrap plugins:
 nvim
 ```
 
+## Second Machine
+
+To set this up on another machine:
+
+```bash
+gh repo clone sonuKumar03/nvim-config ~/.config/nvim
+nvim
+```
+
+If you already have a local config and want to replace it, back it up first:
+
+```bash
+mv ~/.config/nvim ~/.config/nvim.backup
+gh repo clone sonuKumar03/nvim-config ~/.config/nvim
+nvim
+```
+
 ## Main Keys
 
 ### Navigation
@@ -145,4 +162,3 @@ nvim
 - `lazy-lock.json` is committed so plugin versions stay pinned.
 - `nvim.log` is ignored.
 - This repo is configured for a fullstack workflow with JS/TS, Python, and Go support.
-
