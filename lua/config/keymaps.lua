@@ -20,25 +20,25 @@ vim.keymap.set("n", "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>",
 vim.keymap.set("n", "<leader>xr", "<cmd>Trouble lsp_references toggle focus=false<cr>", { desc = "Trouble: References" })
 vim.keymap.set("n", "<leader>xd", "<cmd>Trouble lsp_definitions toggle focus=false<cr>", { desc = "Trouble: Definitions" })
 vim.keymap.set("n", "<leader>sr", function()
-  require("spectre").open({
-    search_text = vim.fn.expand("<cword>"),
-  })
+	require("spectre").open({
+		search_text = vim.fn.expand("<cword>"),
+	})
 end, { desc = "Search/Replace: Project" })
 vim.keymap.set("n", "<leader>sR", function()
-  require("spectre").open_file_search({
-    select_word = true,
-  })
+	require("spectre").open_file_search({
+		select_word = true,
+	})
 end, { desc = "Search/Replace: Current File" })
 vim.keymap.set("v", "<leader>sw", function()
-  require("spectre").open_visual({
-    select_word = true,
-  })
+	require("spectre").open_visual({
+		select_word = true,
+	})
 end, { desc = "Search/Replace: Visual Selection" })
 vim.keymap.set("n", "<leader>sA", function()
-  require("spectre.actions").run_replace()
+	require("spectre.actions").run_replace()
 end, { desc = "Search/Replace: Apply" })
 vim.keymap.set("n", "<leader>sl", function()
-  require("spectre").resume_last_search()
+	require("spectre").resume_last_search()
 end, { desc = "Search/Replace: Resume Last" })
 vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Git: Neogit" })
 vim.keymap.set("n", "<leader>gO", "<cmd>DiffviewOpen<cr>", { desc = "Git: Open Diffview" })
@@ -48,27 +48,27 @@ vim.keymap.set("n", "<leader>gH", "<cmd>DiffviewFileHistory %<cr>", { desc = "Gi
 vim.keymap.set("n", "<leader>gf", "<cmd>Git<cr>", { desc = "Git: Status (Fugitive)" })
 vim.keymap.set("n", "<leader>gB", "<cmd>Git blame<cr>", { desc = "Git: Blame (Fugitive)" })
 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 vim.keymap.set("n", "<leader>pp", "<cmd>Telescope project<cr>", { desc = "Projects: Pick project" })
 vim.keymap.set("n", "<leader>pf", "<cmd>Telescope frecency workspace=CWD<cr>", { desc = "Projects: Frecent files" })
 vim.keymap.set("n", "<leader>cf", function()
-  require("conform").format({ async = true, lsp_format = "fallback" })
+	require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "Format buffer" })
 
 local neotest = require("neotest")
 vim.keymap.set("n", "<leader>tr", neotest.run.run, { desc = "Tests: Run nearest" })
 vim.keymap.set("n", "<leader>tf", function()
-  neotest.run.run(vim.fn.expand("%"))
+	neotest.run.run(vim.fn.expand("%"))
 end, { desc = "Tests: Run file" })
 vim.keymap.set("n", "<leader>ts", function()
-  neotest.run.run(vim.fn.getcwd())
+	neotest.run.run(vim.fn.getcwd())
 end, { desc = "Tests: Run suite" })
 vim.keymap.set("n", "<leader>td", function()
-  neotest.run.run({ strategy = "dap" })
+	neotest.run.run({ strategy = "dap" })
 end, { desc = "Tests: Debug nearest" })
 vim.keymap.set("n", "<leader>tt", neotest.run.stop, { desc = "Tests: Stop" })
 vim.keymap.set("n", "<leader>to", neotest.output.open, { desc = "Tests: Output" })
@@ -82,7 +82,7 @@ local dapui = require("dapui")
 
 vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
 vim.keymap.set("n", "<leader>dB", function()
-  dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+	dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 end, { desc = "Debug: Conditional Breakpoint" })
 vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Debug: Continue" })
 vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "Debug: Open REPL" })
@@ -94,25 +94,25 @@ vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Debug: Step Out" })
 vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "Debug: Run Last" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(ev)
-    local map = function(keys, func, desc)
-      vim.keymap.set("n", keys, func, { buffer = ev.buf, desc = "LSP: " .. desc })
-    end
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(ev)
+		local map = function(keys, func, desc)
+			vim.keymap.set("n", keys, func, { buffer = ev.buf, desc = "LSP: " .. desc })
+		end
 
-    map("gd", vim.lsp.buf.definition, "Goto Definition")
-    map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-    map("gr", vim.lsp.buf.references, "Goto References")
-    map("gI", vim.lsp.buf.implementation, "Goto Implementation")
-    map("gy", vim.lsp.buf.type_definition, "Type Definition")
-	
-    map("K", vim.lsp.buf.hover, "Hover Documentation")
-    map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-    map("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
-    map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+		map("gd", vim.lsp.buf.definition, "Goto Definition")
+		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+		map("gr", vim.lsp.buf.references, "Goto References")
+		map("gI", vim.lsp.buf.implementation, "Goto Implementation")
+		map("gy", vim.lsp.buf.type_definition, "Type Definition")
 
-    map("<leader>cd", vim.diagnostic.open_float, "Line Diagnostics")
-    map("[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
-    map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
-  end,
+		map("K", vim.lsp.buf.hover, "Hover Documentation")
+		map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+		map("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+		map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+
+		map("<leader>cd", vim.diagnostic.open_float, "Line Diagnostics")
+		map("[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
+		map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+	end,
 })
