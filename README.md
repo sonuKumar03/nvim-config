@@ -45,16 +45,17 @@ nvim
 - `<leader>bc` closes the current buffer
 - `<leader>be` opens the Neo-tree buffers view
 - `barbar.nvim` shows open buffers as a tabline
+- native tabpage keymaps are not part of this config
 
 ### Git
 
 - `<leader>gg` opens Neogit
 - `<leader>gf` opens Fugitive status
 - `<leader>gB` opens Fugitive blame
-- `<leader>ga` or `<leader>gO` opens Diffview
-- `<leader>gA` or `<leader>gC` closes Diffview
+- `<leader>gO` opens Diffview
+- `<leader>gC` closes Diffview
 - `<leader>gF` opens file history
-- `<leader>gL` or `<leader>gH` opens current-file history
+- `<leader>gH` opens current-file history
 - `gitsigns` handles hunk staging, reset, preview, blame, and navigation
 
 ### Search and Replace
@@ -108,13 +109,6 @@ nvim
 - `<leader>oO` toggles Overseer
 - `<leader>or` runs an Overseer task
 
-### Tabs
-
-- `<leader>tn` opens a new tab
-- `<leader>th` moves to the previous tab
-- `<leader>tl` moves to the next tab
-- `<leader>tc` closes the current tab
-
 ### LeetCode
 
 - `<leader>lc` opens a Python scratch buffer
@@ -125,4 +119,3 @@ nvim
 - `lazy-lock.json` pins plugin versions.
 - `nvim.log` is ignored.
 - This config is tuned for JS/TS, Python, Go, and Nx work.
-
