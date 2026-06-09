@@ -61,6 +61,7 @@ return {
 				"goimports",
 				"gofumpt",
 				"golangci-lint",
+				"texlab",
 			},
 			run_on_start = true,
 			start_delay = 3000,

@@ -89,7 +89,9 @@ return {
         },
       })
 
-      vim.lsp.enable({ "lua_ls", "pyright", "gopls", "ts_ls" })
+      setup("texlab", {})
+
+      vim.lsp.enable({ "lua_ls", "pyright", "gopls", "ts_ls", "texlab" })
     end,
   },
 }

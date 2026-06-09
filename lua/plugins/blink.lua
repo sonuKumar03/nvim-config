@@ -9,6 +9,9 @@ return {
 			keymap = {
 				preset = "default",
 			},
+			cmdline = {
+				enabled = true,
+			},
 			completion = {
 				documentation = {
 					auto_show = false,

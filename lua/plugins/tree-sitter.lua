@@ -19,6 +19,7 @@ return {
 		auto_install = true,
 		highlight = {
 			enable = true,
+			disable = { "latex", "tex" }, -- VimTeX handles this better
 			additional_vim_regex_highlighting = false,
 		},
 		indent = {

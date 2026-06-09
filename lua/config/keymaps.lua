@@ -112,5 +112,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("<leader>cd", vim.diagnostic.open_float, "Line Diagnostics")
 		map("[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
 		map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+
+		-- Telescope LSP bindings (merged from autocmds.lua)
+		local builtin = require("telescope.builtin")
+		map("grr", builtin.lsp_references, "Goto References (Telescope)")
+		map("gri", builtin.lsp_implementations, "Goto Implementation (Telescope)")
+		map("grd", builtin.lsp_definitions, "Goto Definition (Telescope)")
+		map("gO", builtin.lsp_document_symbols, "Open Document Symbols (Telescope)")
+		map("gW", builtin.lsp_dynamic_workspace_symbols, "Open Workspace Symbols (Telescope)")
+		map("grt", builtin.lsp_type_definitions, "Goto Type Definition (Telescope)")
 	end,
 })
