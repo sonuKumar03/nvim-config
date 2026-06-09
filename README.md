@@ -111,8 +111,8 @@ nvim
 
 ### LeetCode
 
-- `<leader>lc` opens a Python scratch buffer
-- `<leader>lr` runs the current Python file
+- `:LeetCodeScratch` opens a Python scratch buffer
+- `:LeetCodeRun` runs the current Python file
 
 ## Notes
 

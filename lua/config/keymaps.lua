@@ -74,8 +74,6 @@ vim.keymap.set("n", "<leader>tt", neotest.run.stop, { desc = "Tests: Stop" })
 vim.keymap.set("n", "<leader>to", neotest.output.open, { desc = "Tests: Output" })
 vim.keymap.set("n", "<leader>tO", neotest.output_panel.toggle, { desc = "Tests: Output Panel" })
 vim.keymap.set("n", "<leader>tS", neotest.summary.toggle, { desc = "Tests: Summary" })
-vim.keymap.set("n", "<leader>lc", "<cmd>LeetCodeScratch<cr>", { desc = "LeetCode: Scratch" })
-vim.keymap.set("n", "<leader>lr", "<cmd>LeetCodeRun<cr>", { desc = "LeetCode: Run Python file" })
 
 local dap = require("dap")
 local dapui = require("dapui")

@@ -25,3 +25,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "grt", builtin.lsp_type_definitions, { buffer = buf, desc = "[G]oto [T]ype Definition" })
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("latex-keymaps", { clear = true }),
+	pattern = { "tex", "plaintex" },
+	callback = function(event)
+		local map = function(keys, cmd, desc)
+			vim.keymap.set("n", keys, cmd, { buffer = event.buf, desc = "LaTeX: " .. desc })
+		end
+
+		map("<leader>ltc", "<cmd>VimtexCompile<cr>", "Compile")
+		map("<leader>ltv", "<cmd>VimtexView<cr>", "View PDF")
+		map("<leader>ltl", "<cmd>VimtexClean<cr>", "Clean Aux Files")
+	end,
+})

@@ -1,3 +1,4 @@
+vim.loader.enable()
 require("config.options")
 
 -- Setup lazy.nvim
