@@ -123,3 +123,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("grt", builtin.lsp_type_definitions, "Goto Type Definition (Telescope)")
 	end,
 })
+
+-- Cheatsheet split window shortcuts
+vim.keymap.set("n", "<leader>hm", "<cmd>vsplit ~/.config/nvim/cheatsheet_motion.md<cr>", { desc = "Cheatsheet: Vim Motions" })
+vim.keymap.set("n", "<leader>hp", "<cmd>vsplit ~/.config/nvim/cheatsheet_plugins.md<cr>", { desc = "Cheatsheet: Plugins" })
+

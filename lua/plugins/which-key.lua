@@ -8,6 +8,7 @@ return {
       { "<leader>b", group = "Buffers" },
       { "<leader>f", group = "Find" },
       { "<leader>g", group = "Git" },
+      { "<leader>h", group = "Help / Cheatsheets" },
       { "<leader>o", group = "Terminal / Tasks" },
       { "<leader>p", group = "Projects" },
       { "<leader>s", group = "Search / Replace" },
