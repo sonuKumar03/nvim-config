@@ -5,7 +5,7 @@ Neovim setup for fullstack work, Python practice, and Nx monorepos.
 ## Install
 
 ```bash
-gh repo clone sonuKumar03/nvim-config ~/.config/nvim
+git clone https://github.com/sonuKumar03/nvim-config.git ~/.config/nvim
 nvim
 ```
 
@@ -13,7 +13,7 @@ If you already have a local config:
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.backup
-gh repo clone sonuKumar03/nvim-config ~/.config/nvim
+git clone https://github.com/sonuKumar03/nvim-config.git ~/.config/nvim
 nvim
 ```
 
@@ -26,7 +26,13 @@ nvim
 - `node`
 - `python3`
 - `go`
-- `gh`
+
+## Cheatsheets
+
+Need help remembering keys? Check out these detailed references:
+- **[Vim Motion Cheatsheet](./cheatsheet_motion.md)**: Standard movements, editing commands, and text objects.
+- **[Plugins Cheatsheet](./cheatsheet_plugins.md)**: Interactive commands, custom LSP keymaps, search-and-replace, debugging, and test runners.
+
 
 ## Daily Workflow
 
