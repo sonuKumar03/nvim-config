@@ -13,6 +13,7 @@ opt.cursorline = true       -- Highlight the text line under the cursor
 opt.termguicolors = true    -- Enable 24-bit RGB colors (required by Catppuccin)
 opt.signcolumn = "yes"      -- Always show signcolumn to prevent screen jitter/shifting on diagnostics
 opt.showmode = false        -- Don't show mode (e.g. -- INSERT --) since Lualine statusline handles it
+opt.conceallevel = 2        -- Hide markdown markup tags (like ** or ``) for pretty rendering of notes and UI icons
 
 -- =============================================================================
 -- Navigation & Layout Options
