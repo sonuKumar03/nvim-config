@@ -11,6 +11,7 @@ return {
 				{ "<leader>f", group = "Find" },
 				{ "<leader>g", group = "Git" },
 				{ "<leader>h", group = "Harpoon / Help" },
+				{ "<leader>n", group = "Notes / Obsidian" },
 				{ "<leader>o", group = "Terminal / Tasks" },
 				{ "<leader>p", group = "Projects" },
 				{ "<leader>q", group = "Session / Quit" },

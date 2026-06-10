@@ -197,7 +197,21 @@ These keymaps are registered automatically on buffers where a Language Server is
 
 ---
 
-## 14. Minor Workflow Helpers & Previews
+## 14. Notes / Obsidian Note-Taking
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `<leader>nn` | New Note | Create a new Obsidian note file. |
+| `<leader>ns` | Search Text | Fuzzy search for content/text inside all notes. |
+| `<leader>no` | Open in App | Open the active note in the Obsidian desktop application. |
+| `<leader>nt` | Today's Daily Note | Open or create today's daily journal note. |
+| `<leader>ny` | Yesterday's Daily Note | Open or create yesterday's daily journal note. |
+| `<leader>nf` | Follow Link | Follow/open the markdown hyperlink under the cursor. |
+| `<leader>ni` | Insert Template | Insert a custom note template (such as daily template). |
+| `<leader>nb` | Backlinks | View notes that link back to the current active note. |
+
+---
+
+## 15. Minor Workflow Helpers & Previews
 *   **Markdown Preview**: Press **`<leader>mp`** to toggle real-time documentation browser rendering in your browser.
 *   **Blink.cmp**: Autocomplete triggers automatically as you type. Use `Tab` / `Shift+Tab` or `Up` / `Down` to navigate, `Enter` or `Space` to accept.
 *   **Todo Comments**: Annotations like `TODO:`, `FIXME:`, `NOTE:`, `WARNING:` in code comments are syntax-highlighted in custom colors.
@@ -205,4 +219,5 @@ These keymaps are registered automatically on buffers where a Language Server is
 *   **Colorizer**: CSS hexadecimal colors (like `#ff0055`) show their true color block inline.
 *   **Package Info**: In `package.json`, checks latest version dependencies from npm registry and renders info in virtual text.
 *   **Sticky Code Context**: Pins function/class declarations to the top of your screen as you scroll.
+
 
