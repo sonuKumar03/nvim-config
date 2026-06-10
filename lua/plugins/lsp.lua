@@ -135,7 +135,23 @@ return {
 				},
 				jsonls = {},
 				marksman = {},
-				html = {},
+				html = {
+					-- Prevent collision: If in an Angular project, angularls handles HTML templates
+					root_dir = function(bufnr, on_dir)
+						local fname = vim.api.nvim_buf_get_name(bufnr)
+						if angular.find_root(fname) then
+							return nil
+						end
+						local marker = vim.fs.find(
+							{ "package.json", ".git" },
+							{ path = fname, upward = true }
+						)[1]
+						local root = marker and vim.fs.dirname(marker) or nil
+						if root then
+							on_dir(root)
+						end
+					end,
+				},
 				cssls = {},
 			}
 
