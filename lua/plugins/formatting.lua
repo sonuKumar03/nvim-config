@@ -11,6 +11,11 @@ return {
 				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 				python = { "ruff_format" },
 				go = { "goimports", "gofumpt" },
+				json = { "prettierd", "prettier", stop_after_first = true },
+				markdown = { "prettierd", "prettier", stop_after_first = true },
+				html = { "prettierd", "prettier", stop_after_first = true },
+				css = { "prettierd", "prettier", stop_after_first = true },
+				scss = { "prettierd", "prettier", stop_after_first = true },
 			},
 			default_format_opts = {
 				lsp_format = "fallback",
@@ -38,7 +43,9 @@ return {
 				go = { "golangcilint" },
 			}
 
+			local lint_group = vim.api.nvim_create_augroup("nvim-lint", { clear = true })
 			vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+				group = lint_group,
 				callback = function()
 					lint.try_lint()
 				end,
@@ -47,6 +54,7 @@ return {
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"mason-org/mason.nvim",
 			"mason-org/mason-lspconfig.nvim",
@@ -62,6 +70,11 @@ return {
 				"gofumpt",
 				"golangci-lint",
 				"texlab",
+				"json-lsp",
+				"marksman",
+				"html-lsp",
+				"css-lsp",
+				"angular-language-server",
 			},
 			run_on_start = true,
 			start_delay = 3000,
