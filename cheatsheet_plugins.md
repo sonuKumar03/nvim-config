@@ -209,6 +209,10 @@ These keymaps are registered automatically on buffers where a Language Server is
 | `<leader>ni` | Insert Template | Insert a custom note template (such as daily template). |
 | `<leader>nb` | Backlinks | View notes that link back to the current active note. |
 
+*   **Wiki-Link Completion**: Type `[[` inside any note to search and autocomplete links to other notes in your vault.
+*   **Markdown Snippets**: Type helpers like `tbl` (table), `link` (hyperlink), or `code` (code block) and press `Enter` to expand them. Use `Tab` to jump through the parameters.
+*   **Document LSP**: Runs `marksman` to provide auto-completions, lint headers, and enable header definition lookups.
+
 ---
 
 ## 15. Minor Workflow Helpers & Previews
