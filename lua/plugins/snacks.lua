@@ -30,7 +30,7 @@ return {
     git = { enabled = false },
     gitbrowse = { enabled = false },
     indent = { enabled = true },
-    lazygit = { enabled = false },
+    lazygit = { enabled = true },
     picker = { enabled = false },
     quickfile = { enabled = false },
     scratch = { enabled = false },
@@ -41,6 +41,17 @@ return {
   },
   keys = {
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer (Snacks)" },
+    {
+      "<leader>gg",
+      function()
+        if vim.fn.executable("lazygit") == 1 then
+          Snacks.lazygit()
+        else
+          vim.notify("lazygit is not installed. Please run 'brew install lazygit' to enable this feature.", vim.log.levels.WARN)
+        end
+      end,
+      desc = "Git: LazyGit",
+    },
     { "<leader>ud", function() Snacks.toggle.diagnostics():toggle() end, desc = "Toggle Diagnostics" },
     { "<leader>us", function() Snacks.toggle.spelling():toggle() end, desc = "Toggle Spelling" },
     { "<leader>uw", function() Snacks.toggle.option("wrap", { name = "Wrap" }):toggle() end, desc = "Toggle Wrap" },
