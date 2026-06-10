@@ -16,6 +16,15 @@ return {
 				)
 			end
 
+			local function angular_root_dir(fname)
+				if fname == "" or fname == nil then
+					return nil
+				end
+
+				local marker = vim.fs.find({ "angular.json", "nx.json" }, { path = fname, upward = true })[1]
+				return marker and vim.fs.dirname(marker) or nil
+			end
+
 			setup("lua_ls", {
 				settings = {
 					Lua = {
@@ -66,6 +75,14 @@ return {
 			})
 
 			setup("ts_ls", {
+				root_dir = function(bufnr, on_dir)
+					local fname = vim.api.nvim_buf_get_name(bufnr)
+					local marker = vim.fs.find({ "tsconfig.json", "package.json", "jsconfig.json", ".git" }, { path = fname, upward = true })[1]
+					local root = marker and vim.fs.dirname(marker) or nil
+					if root then
+						on_dir(root)
+					end
+				end,
 				settings = {
 					typescript = {
 						inlayHints = {
@@ -106,19 +123,26 @@ return {
 				return vim.fn.stdpath("data") .. "/mason/packages/angular-language-server/node_modules/@angular"
 			end
 
-			local function angular_root_dir(input)
-				local fname = type(input) == "number" and vim.api.nvim_buf_get_name(input) or input
-				if fname == "" or fname == nil then
-					return nil
-				end
-
-				local marker = vim.fs.find({ "angular.json", "nx.json" }, { path = fname, upward = true })[1]
-				return marker and vim.fs.dirname(marker) or nil
-			end
-
 			local function get_project_root(root_dir)
 				local node_modules = vim.fs.find("node_modules", { path = root_dir, upward = true })[1]
 				return node_modules and vim.fs.dirname(node_modules) or nil
+			end
+
+			local function get_ngserver(root_dir)
+				local project_root = get_project_root(root_dir)
+				if project_root then
+					local local_server = project_root .. "/node_modules/@angular/language-server/bin/ngserver"
+					if vim.uv.fs_stat(local_server) then
+						return local_server
+					end
+
+					local bin_server = project_root .. "/node_modules/.bin/ngserver"
+					if vim.uv.fs_stat(bin_server) then
+						return bin_server
+					end
+				end
+
+				return vim.fn.exepath("ngserver")
 			end
 
 			local function get_probe_dir(root_dir)
@@ -153,9 +177,15 @@ return {
 			end
 
 			setup("angularls", {
-				root_dir = angular_root_dir,
+				root_dir = function(bufnr, on_dir)
+					local fname = vim.api.nvim_buf_get_name(bufnr)
+					local root = angular_root_dir(fname)
+					if root then
+						on_dir(root)
+					end
+				end,
 				cmd = {
-					"ngserver",
+					get_ngserver(vim.fn.getcwd()),
 					"--stdio",
 					"--tsProbeLocations",
 					get_probe_dir(vim.fn.getcwd()),
@@ -169,7 +199,7 @@ return {
 					local angular_core_version = get_angular_core_version(new_root_dir)
 
 					new_config.cmd = {
-						vim.fn.exepath("ngserver"),
+						get_ngserver(new_root_dir),
 						"--stdio",
 						"--tsProbeLocations",
 						probe_dir,
