@@ -21,7 +21,7 @@ return {
     },
     dim = { enabled = true },
     input = { enabled = true },
-    notifier = { enabled = true },
+    notifier = { enabled = false },
     profiler = { enabled = true },
     scroll = { enabled = true },
     select = { enabled = true },
