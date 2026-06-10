@@ -1,7 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		lazy = false,
+		lazy = true,
 		config = function()
 			local dap = require("dap")
 
@@ -30,7 +30,7 @@ return {
 	},
 	{
 		"mfussenegger/nvim-dap-python",
-		lazy = false,
+		lazy = true,
 		dependencies = {
 			"mfussenegger/nvim-dap",
 		},
@@ -40,7 +40,7 @@ return {
 	},
 	{
 		"mxsdev/nvim-dap-vscode-js",
-		lazy = false,
+		lazy = true,
 		dependencies = {
 			"mfussenegger/nvim-dap",
 		},
@@ -77,7 +77,7 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		lazy = false,
+		lazy = true,
 		dependencies = {
 			"mfussenegger/nvim-dap",
 			"nvim-neotest/nvim-nio",
@@ -88,7 +88,7 @@ return {
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
-		lazy = false,
+		lazy = true,
 		dependencies = {
 			"mfussenegger/nvim-dap",
 		},
@@ -102,6 +102,7 @@ return {
 	},
 	{
 		"jay-babu/mason-nvim-dap.nvim",
+		lazy = true,
 		dependencies = {
 			"mason-org/mason.nvim",
 			"mfussenegger/nvim-dap",

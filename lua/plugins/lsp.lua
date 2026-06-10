@@ -6,211 +6,184 @@ return {
 		},
 		config = function()
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			local angular = require("plugins.lsp.angular")
 
-			local function setup(server, opts)
-				vim.lsp.config(
-					server,
-					vim.tbl_deep_extend("force", {
-						capabilities = capabilities,
-					}, opts or {})
-				)
-			end
-
-			local function angular_root_dir(fname)
-				if fname == "" or fname == nil then
-					return nil
-				end
-
-				local marker = vim.fs.find({ "angular.json", "nx.json" }, { path = fname, upward = true })[1]
-				return marker and vim.fs.dirname(marker) or nil
-			end
-
-			setup("lua_ls", {
-				settings = {
-					Lua = {
-						runtime = {
-							version = "LuaJIT",
-						},
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							checkThirdParty = false,
-							library = {
-								vim.env.VIMRUNTIME,
+			-- Server configurations table
+			local servers = {
+				lua_ls = {
+					settings = {
+						Lua = {
+							runtime = {
+								version = "LuaJIT",
+							},
+							diagnostics = {
+								globals = { "vim" },
+							},
+							workspace = {
+								checkThirdParty = false,
+								library = {
+									vim.env.VIMRUNTIME,
+								},
+							},
+							telemetry = {
+								enable = false,
 							},
 						},
-						telemetry = {
-							enable = false,
+					},
+				},
+				pyright = {
+					settings = {
+						python = {
+							analysis = {
+								autoSearchPaths = true,
+								useLibraryCodeForTypes = true,
+								diagnosticMode = "workspace",
+							},
 						},
 					},
 				},
-			})
-
-			setup("pyright", {
-				settings = {
-					python = {
-						analysis = {
-							autoSearchPaths = true,
-							useLibraryCodeForTypes = true,
-							diagnosticMode = "workspace",
+				gopls = {
+					settings = {
+						gopls = {
+							gofumpt = true,
+							completeUnimported = true,
+							usePlaceholders = true,
+							staticcheck = true,
+							analyses = {
+								unusedparams = true,
+								unusedwrite = true,
+							},
 						},
 					},
 				},
-			})
-
-			setup("gopls", {
-				settings = {
-					gopls = {
-						gofumpt = true,
-						completeUnimported = true,
-						usePlaceholders = true,
-						staticcheck = true,
-						analyses = {
-							unusedparams = true,
-							unusedwrite = true,
+				ts_ls = {
+					root_dir = function(bufnr, on_dir)
+						local fname = vim.api.nvim_buf_get_name(bufnr)
+						-- Prevent collision: If we are in an Angular project, let angularls handle TypeScript
+						if angular.find_root(fname) then
+							return nil
+						end
+						local marker = vim.fs.find(
+							{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
+							{ path = fname, upward = true }
+						)[1]
+						local root = marker and vim.fs.dirname(marker) or nil
+						if root then
+							on_dir(root)
+						end
+					end,
+					settings = {
+						typescript = {
+							inlayHints = {
+								includeInlayParameterNameHints = "all",
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHints = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
+							},
+						},
+						javascript = {
+							inlayHints = {
+								includeInlayParameterNameHints = "all",
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayVariableTypeHints = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayEnumMemberValueHints = true,
+							},
 						},
 					},
 				},
-			})
-
-			setup("ts_ls", {
-				root_dir = function(bufnr, on_dir)
-					local fname = vim.api.nvim_buf_get_name(bufnr)
-					local marker = vim.fs.find({ "tsconfig.json", "package.json", "jsconfig.json", ".git" }, { path = fname, upward = true })[1]
-					local root = marker and vim.fs.dirname(marker) or nil
-					if root then
-						on_dir(root)
-					end
-				end,
-				settings = {
-					typescript = {
-						inlayHints = {
-							includeInlayParameterNameHints = "all",
-							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-					},
-					javascript = {
-						inlayHints = {
-							includeInlayParameterNameHints = "all",
-							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-					},
-				},
-			})
-
-			setup("texlab", {})
-
-			local function angular_library_path()
-				local ok, registry = pcall(require, "mason-registry")
-				if ok then
-					local ok_package, pkg = pcall(registry.get_package, "angular-language-server")
-					if ok_package and pkg:is_installed() then
-						return pkg:get_install_path() .. "/node_modules/@angular"
-					end
-				end
-
-				return vim.fn.stdpath("data") .. "/mason/packages/angular-language-server/node_modules/@angular"
-			end
-
-			local function get_project_root(root_dir)
-				local node_modules = vim.fs.find("node_modules", { path = root_dir, upward = true })[1]
-				return node_modules and vim.fs.dirname(node_modules) or nil
-			end
-
-			local function get_ngserver(root_dir)
-				local project_root = get_project_root(root_dir)
-				if project_root then
-					local local_server = project_root .. "/node_modules/@angular/language-server/bin/ngserver"
-					if vim.uv.fs_stat(local_server) then
-						return local_server
-					end
-
-					local bin_server = project_root .. "/node_modules/.bin/ngserver"
-					if vim.uv.fs_stat(bin_server) then
-						return bin_server
-					end
-				end
-
-				return vim.fn.exepath("ngserver")
-			end
-
-			local function get_probe_dir(root_dir)
-				local project_root = get_project_root(root_dir)
-				return project_root and (project_root .. "/node_modules") or angular_library_path()
-			end
-
-			local function get_angular_core_version(root_dir)
-				local project_root = get_project_root(root_dir)
-				if not project_root then
-					return ""
-				end
-
-				local package_json = project_root .. "/package.json"
-				local file = io.open(package_json, "r")
-				if not file then
-					return ""
-				end
-
-				local contents = file:read("*a")
-				file:close()
-
-				local ok, json = pcall(vim.json.decode, contents)
-				if not ok or type(json) ~= "table" then
-					return ""
-				end
-
-				local angular_core_version = json.dependencies and json.dependencies["@angular/core"]
-					or json.devDependencies and json.devDependencies["@angular/core"]
-
-				return angular_core_version and angular_core_version:match("%d+%.%d+%.%d+") or ""
-			end
-
-			setup("angularls", {
-				root_dir = function(bufnr, on_dir)
-					local fname = vim.api.nvim_buf_get_name(bufnr)
-					local root = angular_root_dir(fname)
-					if root then
-						on_dir(root)
-					end
-				end,
-				cmd = {
-					get_ngserver(vim.fn.getcwd()),
-					"--stdio",
-					"--tsProbeLocations",
-					get_probe_dir(vim.fn.getcwd()),
-					"--ngProbeLocations",
-					get_probe_dir(vim.fn.getcwd()),
-					"--angularCoreVersion",
-					get_angular_core_version(vim.fn.getcwd()),
-				},
-				on_new_config = function(new_config, new_root_dir)
-					local probe_dir = get_probe_dir(new_root_dir)
-					local angular_core_version = get_angular_core_version(new_root_dir)
-
-					new_config.cmd = {
-						get_ngserver(new_root_dir),
+				texlab = {},
+				angularls = {
+					root_dir = function(bufnr, on_dir)
+						local fname = vim.api.nvim_buf_get_name(bufnr)
+						local root = angular.find_root(fname)
+						if root then
+							on_dir(root)
+						end
+					end,
+					cmd = {
+						angular.resolve_ngserver_bin(vim.fn.getcwd()),
 						"--stdio",
 						"--tsProbeLocations",
-						probe_dir,
+						angular.resolve_probe_dir(vim.fn.getcwd()),
 						"--ngProbeLocations",
-						probe_dir,
+						angular.resolve_probe_dir(vim.fn.getcwd()),
 						"--angularCoreVersion",
-						angular_core_version,
-					}
+						angular.resolve_core_version(vim.fn.getcwd()),
+					},
+					on_new_config = function(new_config, new_root_dir)
+						local probe_dir = angular.resolve_probe_dir(new_root_dir)
+						local angular_core_version = angular.resolve_core_version(new_root_dir)
+
+						new_config.cmd = {
+							angular.resolve_ngserver_bin(new_root_dir),
+							"--stdio",
+							"--tsProbeLocations",
+							probe_dir,
+							"--ngProbeLocations",
+							probe_dir,
+							"--angularCoreVersion",
+							angular_core_version,
+						}
+					end,
+				},
+				jsonls = {},
+				marksman = {},
+				html = {},
+				cssls = {},
+			}
+
+			-- Setup and enable all servers in one place
+			local server_names = {}
+			for name, opts in pairs(servers) do
+				vim.lsp.config(
+					name,
+					vim.tbl_deep_extend("force", {
+						capabilities = capabilities,
+					}, opts)
+				)
+				table.insert(server_names, name)
+			end
+
+			vim.lsp.enable(server_names)
+
+			-- LSP Keymaps on attach
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
+				callback = function(ev)
+					local map = function(keys, func, desc)
+						vim.keymap.set("n", keys, func, { buffer = ev.buf, desc = "LSP: " .. desc })
+					end
+
+					map("gd", vim.lsp.buf.definition, "Goto Definition")
+					map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+					map("gr", vim.lsp.buf.references, "Goto References")
+					map("gI", vim.lsp.buf.implementation, "Goto Implementation")
+					map("gy", vim.lsp.buf.type_definition, "Type Definition")
+
+					map("K", vim.lsp.buf.hover, "Hover Documentation")
+					map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+					map("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+					map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+
+					map("<leader>cd", vim.diagnostic.open_float, "Line Diagnostics")
+					map("[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
+					map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+
+					-- Telescope LSP bindings
+					map("grr", function() require("telescope.builtin").lsp_references() end, "Goto References (Telescope)")
+					map("gri", function() require("telescope.builtin").lsp_implementations() end, "Goto Implementation (Telescope)")
+					map("grd", function() require("telescope.builtin").lsp_definitions() end, "Goto Definition (Telescope)")
+					map("gO", function() require("telescope.builtin").lsp_document_symbols() end, "Open Document Symbols (Telescope)")
+					map("gW", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, "Open Workspace Symbols (Telescope)")
+					map("grt", function() require("telescope.builtin").lsp_type_definitions() end, "Goto Type Definition (Telescope)")
 				end,
 			})
-			vim.lsp.enable({ "angularls", "lua_ls", "pyright", "gopls", "ts_ls", "texlab" })
 		end,
 	},
 }
