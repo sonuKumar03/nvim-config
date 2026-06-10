@@ -13,8 +13,7 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 ## 1. File Tree (Neo-tree)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
-| `<leader>e` | Toggle Neo-tree (Root) | Opens/closes tree explorer at project root directory. |
-| `<leader>E` | Toggle Neo-tree (CWD) | Opens/closes tree explorer at active buffer's directory. |
+| `<leader>e` | Toggle Neo-tree (Root) | Opens/closes tree explorer at project CWD and reveals active file. |
 | `<leader>ge` | Git Status Explorer | Opens Neo-tree showing only changed files. |
 | `<leader>be` | Buffer Explorer | Opens Neo-tree listing active open buffers. |
 
@@ -36,8 +35,8 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `<leader>bn` | New Buffer | Create a new blank buffer/file. |
-| `<leader>bl` | Next Buffer | Jump to the next open buffer tab. |
-| `<leader>bh` | Previous Buffer | Jump to the previous open buffer tab. |
+| `<S-l>` | Next Buffer | Jump to the next open buffer tab. |
+| `<S-h>` | Previous Buffer | Jump to the previous open buffer tab. |
 | `<leader>bc` | Close Buffer | Close/unload the current active buffer. |
 
 ---
@@ -171,9 +170,39 @@ These keymaps are registered automatically on buffers where a Language Server is
 
 ---
 
-## 11. Minor Workflow Helpers
+## 11. Session Management (Persistence)
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `<leader>qs` | Restore Session (CWD) | Restores the saved workspace layout and files for current directory. |
+| `<leader>ql` | Restore Last Session | Restores the last active session globally. |
+| `<leader>qd` | Stop Saving Session | Disables automatic saving of the current session state. |
+
+---
+
+## 12. File Pinning (Harpoon)
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `<leader>ha` | Add File | Pins the current active file buffer to the Harpoon selection list. |
+| `<leader>hh` | Toggle Menu | Opens the interactive floating list window of pinned files. |
+| `<leader>h1` - `4` | Go to File 1 - 4 | Instantly jumps to the corresponding pinned file in the list. |
+
+---
+
+## 13. Toggles & Options (Snacks Toggles)
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `<leader>ud` | Toggle Diagnostics | Dynamically show/hide inline code linting and error warnings. |
+| `<leader>us` | Toggle Spelling | Turn on/off inline spelling checker. |
+| `<leader>uw` | Toggle Wrap | Toggle line wrapping on/off for long files. |
+
+---
+
+## 14. Minor Workflow Helpers & Previews
+*   **Markdown Preview**: Press **`<leader>mp`** to toggle real-time documentation browser rendering in your browser.
 *   **Blink.cmp**: Autocomplete triggers automatically as you type. Use `Tab` / `Shift+Tab` or `Up` / `Down` to navigate, `Enter` or `Space` to accept.
 *   **Todo Comments**: Annotations like `TODO:`, `FIXME:`, `NOTE:`, `WARNING:` in code comments are syntax-highlighted in custom colors.
 *   **HTML Auto-tag**: In `.html`, `.tsx`, `.vue` files, changing an opening tag automatically updates its closing tag counterpart.
 *   **Colorizer**: CSS hexadecimal colors (like `#ff0055`) show their true color block inline.
 *   **Package Info**: In `package.json`, checks latest version dependencies from npm registry and renders info in virtual text.
+*   **Sticky Code Context**: Pins function/class declarations to the top of your screen as you scroll.
+
