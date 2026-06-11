@@ -5,10 +5,19 @@ function M.find_root(fname)
 		return nil
 	end
 	local marker = vim.fs.find({ "angular.json", "nx.json" }, { path = fname, upward = true })[1]
+
 	return marker and vim.fs.dirname(marker) or nil
 end
 
 local function find_project_root(root_dir)
+	if not root_dir or root_dir == "" then
+		return nil
+	end
+	-- Check the angular/nx root itself first (node_modules beside angular.json)
+	if vim.uv.fs_stat(root_dir .. "/node_modules") then
+		return root_dir
+	end
+	-- Then walk upward (Nx nested project: project is under apps/ or libs/)
 	local node_modules = vim.fs.find("node_modules", { path = root_dir, upward = true })[1]
 	return node_modules and vim.fs.dirname(node_modules) or nil
 end
@@ -56,7 +65,8 @@ function M.resolve_ngserver_bin(root_dir)
 	end
 
 	-- Final standard path fallback
-	return vim.fn.stdpath("data") .. "/mason/packages/angular-language-server/node_modules/@angular/language-server/bin/ngserver"
+	return vim.fn.stdpath("data")
+		.. "/mason/packages/angular-language-server/node_modules/@angular/language-server/bin/ngserver"
 end
 
 function M.resolve_probe_dir(root_dir)

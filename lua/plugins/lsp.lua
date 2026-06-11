@@ -8,7 +8,6 @@ return {
 		config = function()
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			local angular = require("plugins.lsp.angular")
-
 			-- Server configurations table
 			local servers = {
 				lua_ls = {
@@ -60,10 +59,9 @@ return {
 				ts_ls = {
 					root_dir = function(bufnr, on_dir)
 						local fname = vim.api.nvim_buf_get_name(bufnr)
-						-- Prevent collision: If we are in an Angular project, let angularls handle TypeScript
-						if angular.find_root(fname) then
-							return nil
-						end
+						-- ts_ls attaches everywhere (including Angular projects) to provide
+						-- declaration (gD) and implementation (gI) navigation.
+						-- Diagnostics in Angular projects are owned by angularls.
 						local marker = vim.fs.find(
 							{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
 							{ path = fname, upward = true }
@@ -107,22 +105,12 @@ return {
 							on_dir(root)
 						end
 					end,
-					cmd = {
-						angular.resolve_ngserver_bin(vim.fn.getcwd()),
-						"--stdio",
-						"--tsProbeLocations",
-						angular.resolve_probe_dir(vim.fn.getcwd()),
-						"--ngProbeLocations",
-						angular.resolve_probe_dir(vim.fn.getcwd()),
-						"--angularCoreVersion",
-						angular.resolve_core_version(vim.fn.getcwd()),
-					},
-					on_new_config = function(new_config, new_root_dir)
-						local probe_dir = angular.resolve_probe_dir(new_root_dir)
-						local angular_core_version = angular.resolve_core_version(new_root_dir)
-
-						new_config.cmd = {
-							angular.resolve_ngserver_bin(new_root_dir),
+					cmd = function(dispatchers, config)
+						local root_dir = config and config.root_dir or vim.fn.getcwd()
+						local probe_dir = angular.resolve_probe_dir(root_dir)
+						local angular_core_version = angular.resolve_core_version(root_dir)
+						local cmd = {
+							angular.resolve_ngserver_bin(root_dir),
 							"--stdio",
 							"--tsProbeLocations",
 							probe_dir,
@@ -131,6 +119,7 @@ return {
 							"--angularCoreVersion",
 							angular_core_version,
 						}
+						return vim.lsp.rpc.start(cmd, dispatchers)
 					end,
 				},
 				jsonls = {},
@@ -142,10 +131,7 @@ return {
 						if angular.find_root(fname) then
 							return nil
 						end
-						local marker = vim.fs.find(
-							{ "package.json", ".git" },
-							{ path = fname, upward = true }
-						)[1]
+						local marker = vim.fs.find({ "package.json", ".git" }, { path = fname, upward = true })[1]
 						local root = marker and vim.fs.dirname(marker) or nil
 						if root then
 							on_dir(root)
@@ -178,9 +164,9 @@ return {
 					end
 
 					map("gd", vim.lsp.buf.definition, "Goto Definition")
-					map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+					map("gD", vim.lsp.buf.declaration, "Goto Declaration") -- handled by ts_ls
 					map("gr", vim.lsp.buf.references, "Goto References")
-					map("gI", vim.lsp.buf.implementation, "Goto Implementation")
+					map("gI", vim.lsp.buf.implementation, "Goto Implementation") -- handled by ts_ls
 					map("gy", vim.lsp.buf.type_definition, "Type Definition")
 
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -193,12 +179,24 @@ return {
 					map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
 
 					-- Telescope LSP bindings
-					map("grr", function() require("telescope.builtin").lsp_references() end, "Goto References (Telescope)")
-					map("gri", function() require("telescope.builtin").lsp_implementations() end, "Goto Implementation (Telescope)")
-					map("grd", function() require("telescope.builtin").lsp_definitions() end, "Goto Definition (Telescope)")
-					map("gO", function() require("telescope.builtin").lsp_document_symbols() end, "Open Document Symbols (Telescope)")
-					map("gW", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, "Open Workspace Symbols (Telescope)")
-					map("grt", function() require("telescope.builtin").lsp_type_definitions() end, "Goto Type Definition (Telescope)")
+					map("grr", function()
+						require("telescope.builtin").lsp_references()
+					end, "Goto References (Telescope)")
+					map("gri", function()
+						require("telescope.builtin").lsp_implementations()
+					end, "Goto Implementation (Telescope)")
+					map("grd", function()
+						require("telescope.builtin").lsp_definitions()
+					end, "Goto Definition (Telescope)")
+					map("gO", function()
+						require("telescope.builtin").lsp_document_symbols()
+					end, "Open Document Symbols (Telescope)")
+					map("gW", function()
+						require("telescope.builtin").lsp_dynamic_workspace_symbols()
+					end, "Open Workspace Symbols (Telescope)")
+					map("grt", function()
+						require("telescope.builtin").lsp_type_definitions()
+					end, "Goto Type Definition (Telescope)")
 				end,
 			})
 		end,
