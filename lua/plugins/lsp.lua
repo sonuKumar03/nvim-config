@@ -59,9 +59,6 @@ return {
 				ts_ls = {
 					root_dir = function(bufnr, on_dir)
 						local fname = vim.api.nvim_buf_get_name(bufnr)
-						-- ts_ls attaches everywhere (including Angular projects) to provide
-						-- declaration (gD) and implementation (gI) navigation.
-						-- Diagnostics in Angular projects are owned by angularls.
 						local marker = vim.fs.find(
 							{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
 							{ path = fname, upward = true }
@@ -98,6 +95,7 @@ return {
 				},
 				texlab = {},
 				angularls = {
+					filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
 					root_dir = function(bufnr, on_dir)
 						local fname = vim.api.nvim_buf_get_name(bufnr)
 						local root = angular.find_root(fname)
@@ -105,8 +103,9 @@ return {
 							on_dir(root)
 						end
 					end,
-					cmd = function(dispatchers, config)
-						local root_dir = config and config.root_dir or vim.fn.getcwd()
+					cmd = function(dispatchers)
+						local fname = vim.api.nvim_buf_get_name(0)
+						local root_dir = angular.find_root(fname) or vim.fn.getcwd()
 						local probe_dir = angular.resolve_probe_dir(root_dir)
 						local angular_core_version = angular.resolve_core_version(root_dir)
 						local cmd = {
@@ -159,6 +158,24 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
 				callback = function(ev)
+					local client = vim.lsp.get_client_by_id(ev.data.client_id)
+					if client and client.name == "angularls" then
+						if not client._supports_method_overridden then
+							client._supports_method_overridden = true
+							local orig_supports_method = client.supports_method
+							client.supports_method = function(method, opts)
+								if method == "textDocument/definition" then
+									local bufnr = opts and opts.bufnr or 0
+									local ft = vim.bo[bufnr].filetype
+									if ft == "typescript" or ft == "typescriptreact" or ft == "typescript.tsx" then
+										return false
+									end
+								end
+								return orig_supports_method(method, opts)
+							end
+						end
+					end
+
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = ev.buf, desc = "LSP: " .. desc })
 					end
