@@ -1,3 +1,9 @@
+---
+name: RTK Rules
+description: Enforce prefixing shell commands with rtk to save tokens
+activation: always-on
+---
+
 # RTK - Rust Token Killer (Google Antigravity)
 
 **Usage**: Token-optimized CLI proxy for shell commands.
