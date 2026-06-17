@@ -31,12 +31,12 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 
 ---
 
-## 3. Buffer Tabs Management (Barbar)
+## 3. Buffer Management
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `<leader>bn` | New Buffer | Create a new blank buffer/file. |
-| `<S-l>` | Next Buffer | Jump to the next open buffer tab. |
-| `<S-h>` | Previous Buffer | Jump to the previous open buffer tab. |
+| `<leader>bl` | Next Buffer | Jump to the next open buffer. |
+| `<leader>bh` | Previous Buffer | Jump to the previous open buffer. |
 | `<leader>bc` | Close Buffer | Close/unload the current active buffer. |
 
 ---
@@ -108,9 +108,7 @@ These keymaps are registered automatically on buffers where a Language Server is
 ### Git Dashboards
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
-| `<leader>gg` | Neogit | Open interactive Magit-like Git client inside Neovim. |
-| `<leader>gf` | Git Fugitive | Open Vim-Fugitive status window. |
-| `<leader>gB` | Git Blame | Display inline commit info for current file lines. |
+| `<leader>gg` | LazyGit | Open the terminal Git UI from Snacks. |
 
 ### Code Diffs (Diffview)
 | Keymap | Action | Description |
@@ -160,10 +158,9 @@ These keymaps are registered automatically on buffers where a Language Server is
 
 ---
 
-## 10. Terminals & Tasks
+## 10. Tasks
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
-| `<leader>ot` | Toggle Terminal | Open/close floating command terminal. |
 | `<leader>oo` | Overseer Open | Open task list panel (compilation/runner tasks). |
 | `<leader>oO` | Overseer Toggle | Toggle the task panel visibility. |
 | `<leader>or` | Overseer Run | Open task runner template menu to choose a template. |
@@ -221,7 +218,5 @@ These keymaps are registered automatically on buffers where a Language Server is
 *   **Todo Comments**: Annotations like `TODO:`, `FIXME:`, `NOTE:`, `WARNING:` in code comments are syntax-highlighted in custom colors.
 *   **HTML Auto-tag**: In `.html`, `.tsx`, `.vue` files, changing an opening tag automatically updates its closing tag counterpart.
 *   **Colorizer**: CSS hexadecimal colors (like `#ff0055`) show their true color block inline.
-*   **Package Info**: In `package.json`, checks latest version dependencies from npm registry and renders info in virtual text.
 *   **Sticky Code Context**: Pins function/class declarations to the top of your screen as you scroll.
-
 

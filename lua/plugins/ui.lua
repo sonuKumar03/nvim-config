@@ -22,29 +22,6 @@ return {
 		},
 	},
 
-	-- Barbar Buffer Tabs: Top bar tabs showing active open buffers
-	{
-		"romgrk/barbar.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		cmd = {
-			"BufferNext",
-			"BufferPrevious",
-			"BufferClose",
-			"BufferCloseAllButVisible",
-			"BufferPick",
-			"BufferGoto",
-		},
-		version = "^1.7.1",
-		init = function()
-			vim.g.barbar_auto_setup = false -- Disable auto-setup to let lazy.nvim configure it
-		end,
-		dependencies = {
-			"lewis6991/gitsigns.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-		opts = {},
-	},
-
 	-- Fidget: Visual progress bar spinner for LSP status updates (indexing, diagnosing, etc.)
 	{
 		"j-hui/fidget.nvim",

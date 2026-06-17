@@ -47,17 +47,14 @@ Need help remembering keys? Check out these detailed references:
 ### Files and Buffers
 
 - `<leader>bn` creates a new buffer
-- `<leader>bh` and `<leader>bl` move between buffers
+- `<leader>bh` and `<leader>bl` move to previous/next buffers
 - `<leader>bc` closes the current buffer
 - `<leader>be` opens the Neo-tree buffers view
-- `barbar.nvim` shows open buffers as a tabline
 - native tabpage keymaps are not part of this config
 
 ### Git
 
-- `<leader>gg` opens Neogit
-- `<leader>gf` opens Fugitive status
-- `<leader>gB` opens Fugitive blame
+- `<leader>gg` opens LazyGit
 - `<leader>gO` opens Diffview
 - `<leader>gC` closes Diffview
 - `<leader>gF` opens file history
@@ -107,10 +104,8 @@ Need help remembering keys? Check out these detailed references:
 - `<leader>tO` toggles the output panel
 - `<leader>tS` toggles the summary panel
 
-### Terminal and Tasks
+### Tasks
 
-- `<leader>ot` toggles the terminal
-- `toggleterm.nvim` opens a horizontal split by default
 - `<leader>oo` opens Overseer
 - `<leader>oO` toggles Overseer
 - `<leader>or` runs an Overseer task

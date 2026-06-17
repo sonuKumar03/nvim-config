@@ -87,20 +87,6 @@ return {
 		end,
 	},
 	{
-		"theHamsta/nvim-dap-virtual-text",
-		lazy = true,
-		dependencies = {
-			"mfussenegger/nvim-dap",
-		},
-		config = function()
-			require("nvim-dap-virtual-text").setup({
-				virt_text_pos = "eol",
-				highlight_changed_variables = true,
-				highlight_new_as_changed = false,
-			})
-		end,
-	},
-	{
 		"jay-babu/mason-nvim-dap.nvim",
 		lazy = true,
 		dependencies = {

@@ -74,30 +74,4 @@ return {
 			})
 		end,
 	},
-	{
-		"NeogitOrg/neogit",
-		cmd = "Neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"sindrets/diffview.nvim",
-		},
-		config = function()
-			require("neogit").setup({
-				kind = "tab",
-				signs = {
-					item = { ">", "v" },
-					section = { ">", "v" },
-				},
-			})
-		end,
-	},
-	{
-		"tpope/vim-fugitive",
-		cmd = {
-			"Git",
-			"G",
-			"Gdiffsplit",
-			"Gvdiffsplit",
-		},
-	},
 }

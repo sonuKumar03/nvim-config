@@ -12,7 +12,7 @@ return {
 				{ "<leader>g", group = "Git" },
 				{ "<leader>h", group = "Harpoon / Help" },
 				{ "<leader>n", group = "Notes / Obsidian" },
-				{ "<leader>o", group = "Terminal / Tasks" },
+				{ "<leader>o", group = "Tasks" },
 				{ "<leader>p", group = "Projects" },
 				{ "<leader>q", group = "Session / Quit" },
 				{ "<leader>s", group = "Search / Replace" },
@@ -29,24 +29,6 @@ return {
 				end,
 				desc = "Keymaps (which-key)",
 			},
-		},
-	},
-
-	-- Toggleterm: Floating terminal manager
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		cmd = {
-			"ToggleTerm",
-			"TermExec",
-		},
-		opts = {
-			direction = "horizontal",
-			shade_terminals = true,
-			start_in_insert = true,
-			insert_mappings = true,
-			persist_size = true,
-			close_on_exit = true,
 		},
 	},
 
@@ -69,14 +51,6 @@ return {
 				},
 			},
 		},
-	},
-
-	-- Package Info: NPM dependencies virtual-text inline updates checker
-	{
-		"vuki656/package-info.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		event = "BufRead package.json",
-		opts = {},
 	},
 
 	-- VimTeX: Rich integration for LaTeX documents compiling
