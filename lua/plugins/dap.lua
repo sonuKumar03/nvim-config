@@ -35,7 +35,19 @@ return {
 			"mfussenegger/nvim-dap",
 		},
 		config = function()
-			require("dap-python").setup("debugpy-adapter")
+			local path = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python"
+			require("dap-python").setup(path)
+		end,
+	},
+	{
+		"leoluz/nvim-dap-go",
+		lazy = true,
+		dependencies = {
+			"mfussenegger/nvim-dap",
+		},
+		ft = "go",
+		config = function()
+			require("dap-go").setup()
 		end,
 	},
 	{
@@ -95,7 +107,7 @@ return {
 		},
 		config = function()
 			require("mason-nvim-dap").setup({
-				ensure_installed = { "python", "js-debug-adapter" },
+				ensure_installed = { "python", "delve", "js-debug-adapter" },
 				automatic_installation = true,
 			})
 		end,
