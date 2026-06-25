@@ -21,7 +21,17 @@ return {
     },
     dim = { enabled = true },
     input = { enabled = true },
-    notifier = { enabled = false },
+    notifier = {
+      enabled = true,
+      timeout = 4000,
+    },
+    styles = {
+      notification = {
+        wo = {
+          wrap = true,
+        },
+      },
+    },
     profiler = { enabled = true },
     scroll = { enabled = true },
     select = { enabled = true },
