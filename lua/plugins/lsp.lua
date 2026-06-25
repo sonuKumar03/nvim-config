@@ -56,20 +56,21 @@ return {
 						},
 					},
 				},
-				ts_ls = {
-					root_dir = function(bufnr, on_dir)
-						local fname = vim.api.nvim_buf_get_name(bufnr)
-						local marker = vim.fs.find(
-							{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
-							{ path = fname, upward = true }
-						)[1]
-						local root = marker and vim.fs.dirname(marker) or nil
-						if root then
-							on_dir(root)
-						end
-					end,
+				vtsls = {
 					settings = {
 						typescript = {
+							tsserver = {
+								maxTsServerMemory = 4096,
+							},
+							referencesCodeLens = {
+								enabled = true,
+								showOnAllFunctions = false,
+							},
+							implementationsCodeLens = {
+								enabled = true,
+								showOnAllClassMethods = false,
+								showOnInterfaceMethods = true,
+							},
 							inlayHints = {
 								includeInlayParameterNameHints = "all",
 								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
@@ -79,8 +80,29 @@ return {
 								includeInlayFunctionLikeReturnTypeHints = true,
 								includeInlayEnumMemberValueHints = true,
 							},
+							suggest = {
+								completeFunctionCalls = true,
+								autoImports = true,
+								paths = true,
+							},
+							preferences = {
+								importModuleSpecifier = "non-relative",
+								importModuleSpecifierEnding = "minimal",
+								includePackageJsonAutoImports = "on",
+								preferTypeOnlyAutoImports = true,
+								autoImportFileExcludePatterns = {
+									"**/dist/**",
+									"**/.nx/**",
+									"**/coverage/**",
+									"**/tmp/**",
+								},
+							},
 						},
 						javascript = {
+							referencesCodeLens = {
+								enabled = true,
+								showOnAllFunctions = false,
+							},
 							inlayHints = {
 								includeInlayParameterNameHints = "all",
 								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
@@ -89,6 +111,30 @@ return {
 								includeInlayPropertyDeclarationTypeHints = true,
 								includeInlayFunctionLikeReturnTypeHints = true,
 								includeInlayEnumMemberValueHints = true,
+							},
+							suggest = {
+								completeFunctionCalls = true,
+								autoImports = true,
+								paths = true,
+							},
+							preferences = {
+								importModuleSpecifier = "non-relative",
+								importModuleSpecifierEnding = "minimal",
+								includePackageJsonAutoImports = "on",
+								autoImportFileExcludePatterns = {
+									"**/dist/**",
+									"**/.nx/**",
+									"**/coverage/**",
+									"**/tmp/**",
+								},
+							},
+						},
+						vtsls = {
+							experimental = {
+								completion = {
+									enableServerSideFuzzyMatch = true,
+									entriesLimit = 200,
+								},
 							},
 						},
 					},
@@ -109,6 +155,8 @@ return {
 						local probe_dir = angular.resolve_probe_dir(root_dir)
 						local angular_core_version = angular.resolve_core_version(root_dir)
 						local cmd = {
+							vim.fn.exepath("node"),
+							"--max-old-space-size=4096",
 							angular.resolve_ngserver_bin(root_dir),
 							"--stdio",
 							"--tsProbeLocations",
@@ -181,9 +229,9 @@ return {
 					end
 
 					map("gd", vim.lsp.buf.definition, "Goto Definition")
-					map("gD", vim.lsp.buf.declaration, "Goto Declaration") -- handled by ts_ls
+					map("gD", vim.lsp.buf.declaration, "Goto Declaration") -- handled by vtsls
 					map("gr", vim.lsp.buf.references, "Goto References")
-					map("gI", vim.lsp.buf.implementation, "Goto Implementation") -- handled by ts_ls
+					map("gI", vim.lsp.buf.implementation, "Goto Implementation") -- handled by vtsls
 					map("gy", vim.lsp.buf.type_definition, "Type Definition")
 
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
