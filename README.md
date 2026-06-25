@@ -43,6 +43,14 @@ Need help remembering keys? Check out these detailed references:
 - `<leader>fg` searches text across the project
 - `<leader>e` opens Neo-tree at the project root
 - `<leader>E` opens Neo-tree at the current directory
+- `<leader>co` toggles the dedicated code outline sidebar (Aerial)
+
+### Editing & Commenting
+
+- `gcc` comments or uncomments the current line
+- `gbc` block comments the current line
+- `gc` (in Visual mode) comments or uncomments the selection
+- `gb` (in Visual mode) block comments the selection
 
 ### Files and Buffers
 
@@ -59,6 +67,7 @@ Need help remembering keys? Check out these detailed references:
 - `<leader>gC` closes Diffview
 - `<leader>gF` opens file history
 - `<leader>gH` opens current-file history
+- `<leader>gb` toggles inline current-line Git blame
 - `gitsigns` handles hunk staging, reset, preview, blame, and navigation
 
 ### Search and Replace

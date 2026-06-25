@@ -7,7 +7,7 @@ return {
 		},
 		config = function()
 			require("gitsigns").setup({
-				current_line_blame = false,
+				current_line_blame = true,
 				on_attach = function(bufnr)
 					local gitsigns = require("gitsigns")
 					local function map(mode, lhs, rhs, desc)

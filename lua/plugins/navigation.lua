@@ -102,4 +102,24 @@ return {
 			{ "<leader>h4", function() require("harpoon"):list():select(4) end, desc = "Harpoon: Go to File 4" },
 		},
 	},
+
+	-- Aerial: Code outline navigation sidebar
+	{
+		"stevearc/aerial.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {
+			on_attach = function(bufnr)
+				vim.keymap.set("n", "{", "<cmd>AerialPrev<cr>", { buffer = bufnr, desc = "Aerial: Jump Prev" })
+				vim.keymap.set("n", "}", "<cmd>AerialNext<cr>", { buffer = bufnr, desc = "Aerial: Jump Next" })
+			end,
+			nerd_font = "auto",
+		},
+		keys = {
+			{ "<leader>co", "<cmd>AerialToggle! right<cr>", desc = "Code: Toggle Outline (Aerial)" },
+		},
+	},
 }
+

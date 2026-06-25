@@ -252,3 +252,22 @@ These keymaps are registered automatically on buffers where a Language Server is
 *   **HTML Auto-tag**: In `.html`, `.tsx`, `.vue` files, changing an opening tag automatically updates its closing tag counterpart.
 *   **Colorizer**: CSS hexadecimal colors (like `#ff0055`) show their true color block inline.
 *   **Sticky Code Context**: Pins function/class declarations to the top of your screen as you scroll.
+
+---
+
+## 16. Smart Commenting (Comment.nvim)
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `gcc` | Toggle Line Comment | Comment/uncomment the current line. |
+| `gbc` | Toggle Block Comment | Block comment/uncomment the current line. |
+| `gc` | Comment Selection | Comment/uncomment selection (Visual Mode). |
+| `gb` | Block Comment Selection | Block comment/uncomment selection (Visual Mode). |
+
+---
+
+## 17. Code Outline Sidebar (Aerial.nvim)
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `<leader>co` | Toggle Outline | Open/close the Aerial code structure/outline panel on the right. |
+| `{` | Jump Previous Symbol | Navigate to the previous symbol definition (when inside file with Aerial active). |
+| `}` | Jump Next Symbol | Navigate to the next symbol definition (when inside file with Aerial active). |
