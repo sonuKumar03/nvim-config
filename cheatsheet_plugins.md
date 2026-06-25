@@ -39,14 +39,17 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 
 ---
 
-## 3. Buffer Management
+## 3. Buffer Management (Bufferline)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
-| `<leader>bn` | New Buffer | Create a new blank buffer/file. |
-| `<leader>bl` | Next Buffer | Jump to the next open buffer. |
-| `<leader>bh` | Previous Buffer | Jump to the previous open buffer. |
-| `<leader>bc` | Close Buffer | Close/unload the current active buffer. |
-| `<leader>bd` | Delete Buffer | Delete the current buffer without disrupting window layout. |
+| `<Tab>` / `]b` | Next Buffer | Jump to the next open buffer in the tabline. |
+| `<S-Tab>` / `[b` | Previous Buffer | Jump to the previous open buffer in the tabline. |
+| `<leader>bp` | Pick Buffer | Pick a buffer directly by typing its visible overlay letter. |
+| `<leader>bd` | Delete Buffer | Delete the current active buffer safely without closing window splits. |
+| `<leader>bn` | New Buffer | Create a new blank file buffer. |
+| `<leader>bc` | Close Buffer (Raw) | Close the current buffer via raw `:bdelete` command. |
+| `<leader>bl` | Next Buffer (Raw) | Jump to the next open buffer via raw `:bnext` command. |
+| `<leader>bh` | Previous Buffer (Raw)| Jump to the previous buffer via raw `:bprevious` command. |
 
 ---
 
