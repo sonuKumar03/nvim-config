@@ -17,9 +17,6 @@ return {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
 					},
-					project = {
-						hide_workspace = true,
-					},
 				},
 			})
 
