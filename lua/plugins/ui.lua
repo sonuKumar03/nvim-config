@@ -119,4 +119,29 @@ return {
 			{ "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown: Live Preview" },
 		},
 	},
+
+	-- Bufferline: Tabs-like header bar for open buffers
+	{
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		event = "VeryLazy",
+		keys = {
+			{ "<Tab>", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer: Next" },
+			{ "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer: Prev" },
+			{ "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer: Next" },
+			{ "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer: Prev" },
+			{ "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "Buffer: Pick" },
+			{ "<leader>bd", "<cmd>bdelete<cr>", desc = "Buffer: Delete" },
+		},
+		opts = {
+			options = {
+				mode = "buffers",
+				diagnostics = "nvim_lsp",
+				always_show_bufferline = true,
+				show_buffer_close_icons = false,
+				show_close_icon = false,
+			},
+		},
+	},
 }
