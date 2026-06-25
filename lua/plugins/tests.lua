@@ -28,6 +28,9 @@ return {
 						runner = "pytest",
 					}),
 				},
+				output = {
+					open_on_run = true,
+				},
 			})
 		end,
 	},
