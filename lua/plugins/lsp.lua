@@ -57,6 +57,17 @@ return {
 					},
 				},
 				vtsls = {
+					root_dir = function(bufnr, on_dir)
+						local fname = vim.api.nvim_buf_get_name(bufnr)
+						local marker = vim.fs.find(
+							{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
+							{ path = fname, upward = true }
+						)[1]
+						local root = marker and vim.fs.dirname(marker) or nil
+						if root then
+							on_dir(root)
+						end
+					end,
 					settings = {
 						typescript = {
 							tsserver = {
@@ -135,6 +146,7 @@ return {
 									enableServerSideFuzzyMatch = true,
 									entriesLimit = 200,
 								},
+								enableProjectDiagnostics = false,
 							},
 						},
 					},
@@ -144,14 +156,22 @@ return {
 					filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
 					root_dir = function(bufnr, on_dir)
 						local fname = vim.api.nvim_buf_get_name(bufnr)
-						local root = angular.find_root(fname)
+						local marker = vim.fs.find(
+							{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
+							{ path = fname, upward = true }
+						)[1]
+						local root = marker and vim.fs.dirname(marker) or nil
 						if root then
 							on_dir(root)
 						end
 					end,
 					cmd = function(dispatchers)
 						local fname = vim.api.nvim_buf_get_name(0)
-						local root_dir = angular.find_root(fname) or vim.fn.getcwd()
+						local marker = vim.fs.find(
+							{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
+							{ path = fname, upward = true }
+						)[1]
+						local root_dir = marker and vim.fs.dirname(marker) or vim.fn.getcwd()
 						local probe_dir = angular.resolve_probe_dir(root_dir)
 						local angular_core_version = angular.resolve_core_version(root_dir)
 						local cmd = {
@@ -222,6 +242,23 @@ return {
 								return orig_supports_method(method, opts)
 							end
 						end
+					end
+
+					-- Toggle inlay hints in insert mode to eliminate typing lag
+					if client and client.supports_method("textDocument/inlayHint") then
+						vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+						vim.api.nvim_create_autocmd("InsertEnter", {
+							buffer = ev.buf,
+							callback = function()
+								vim.lsp.inlay_hint.enable(false, { bufnr = ev.buf })
+							end,
+						})
+						vim.api.nvim_create_autocmd("InsertLeave", {
+							buffer = ev.buf,
+							callback = function()
+								vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+							end,
+						})
 					end
 
 					local map = function(keys, func, desc)
