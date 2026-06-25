@@ -10,6 +10,27 @@ return {
 		end,
 	},
 
+	-- Dropbar: IDE-like breadcrumbs in the winbar with symbol pick support
+	{
+		"Bekaboo/dropbar.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		},
+		config = function()
+			local dropbar_api = require("dropbar.api")
+			vim.keymap.set("n", "<leader>;", dropbar_api.pick, { desc = "Dropbar: Pick Symbols" })
+			vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Dropbar: Context Start" })
+			vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Dropbar: Next Context" })
+		end,
+	},
+
+	-- Smear Cursor: Animated cursor trail for terminal Neovim
+	{
+		"sphamba/smear-cursor.nvim",
+		opts = {},
+	},
+
 	-- Lualine Statusline: Customizable active status bar at the bottom
 	{
 		"nvim-lualine/lualine.nvim",

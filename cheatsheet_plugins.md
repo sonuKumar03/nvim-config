@@ -10,6 +10,14 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 
 ---
 
+## Cheatsheets
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `<leader>cm` | Vim Motions Cheatsheet | Open the core motion/editing cheatsheet in a vertical split. |
+| `<leader>cp` | Plugin Cheatsheet | Open this plugin/keymap cheatsheet in a vertical split. |
+
+---
+
 ## 1. File Tree (Neo-tree)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
@@ -38,6 +46,7 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 | `<leader>bl` | Next Buffer | Jump to the next open buffer. |
 | `<leader>bh` | Previous Buffer | Jump to the previous open buffer. |
 | `<leader>bc` | Close Buffer | Close/unload the current active buffer. |
+| `<leader>bd` | Delete Buffer | Delete the current buffer without disrupting window layout. |
 
 ---
 
@@ -110,6 +119,23 @@ These keymaps are registered automatically on buffers where a Language Server is
 | :--- | :--- | :--- |
 | `<leader>gg` | LazyGit | Open the terminal Git UI from Snacks. |
 
+### Git Hunks (Gitsigns)
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `]h` | Next Hunk | Jump to the next changed Git hunk. |
+| `[h` | Previous Hunk | Jump to the previous changed Git hunk. |
+| `<leader>gs` | Stage Hunk | Stage the current changed hunk. |
+| `<leader>gr` | Reset Hunk | Reset the current changed hunk. |
+| `<leader>gS` | Stage Buffer | Stage all changes in the current buffer. |
+| `<leader>gR` | Reset Buffer | Reset all changes in the current buffer. |
+| `<leader>gu` | Undo Stage Hunk | Undo staging for the current hunk. |
+| `<leader>gp` | Preview Hunk | Preview the current hunk in a floating window. |
+| `<leader>gP` | Preview Hunk Inline | Preview the current hunk inline. |
+| `<leader>gb` | Toggle Blame | Show/hide current line Git blame. |
+| `<leader>gd` | Diff This | Open a diff for the current buffer. |
+| `<leader>gq` | Hunks to Quickfix | Send changed hunks to the quickfix list. |
+| `<leader>gQ` | Hunks to Location List | Send changed hunks to the location list. |
+
 ### Code Diffs (Diffview)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
@@ -164,6 +190,8 @@ These keymaps are registered automatically on buffers where a Language Server is
 | `<leader>oo` | Overseer Open | Open task list panel (compilation/runner tasks). |
 | `<leader>oO` | Overseer Toggle | Toggle the task panel visibility. |
 | `<leader>or` | Overseer Run | Open task runner template menu to choose a template. |
+| `<leader>ot` | Toggle Terminal | Open/close the floating ToggleTerm terminal. |
+| `<C-\>` | Toggle Terminal | Fast terminal toggle from Normal or Terminal mode. |
 
 ---
 
@@ -213,10 +241,11 @@ These keymaps are registered automatically on buffers where a Language Server is
 ---
 
 ## 15. Minor Workflow Helpers & Previews
+*   **Dropbar**: Press **`<leader>;`** to pick symbols from the winbar. Use **`[;`** to jump to the current context start and **`];`** to select the next context.
 *   **Markdown Preview**: Press **`<leader>mp`** to toggle real-time documentation browser rendering in your browser.
 *   **Blink.cmp**: Autocomplete triggers automatically as you type. Use `Tab` / `Shift+Tab` or `Up` / `Down` to navigate, `Enter` or `Space` to accept.
+*   **Smear Cursor**: Adds a subtle animated cursor trail in terminal Neovim.
 *   **Todo Comments**: Annotations like `TODO:`, `FIXME:`, `NOTE:`, `WARNING:` in code comments are syntax-highlighted in custom colors.
 *   **HTML Auto-tag**: In `.html`, `.tsx`, `.vue` files, changing an opening tag automatically updates its closing tag counterpart.
 *   **Colorizer**: CSS hexadecimal colors (like `#ff0055`) show their true color block inline.
 *   **Sticky Code Context**: Pins function/class declarations to the top of your screen as you scroll.
-

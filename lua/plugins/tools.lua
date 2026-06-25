@@ -10,7 +10,7 @@ return {
 				{ "<leader>b", group = "Buffers" },
 				{ "<leader>f", group = "Find" },
 				{ "<leader>g", group = "Git" },
-				{ "<leader>h", group = "Harpoon / Help" },
+				{ "<leader>h", group = "Harpoon" },
 				{ "<leader>n", group = "Notes / Obsidian" },
 				{ "<leader>o", group = "Tasks" },
 				{ "<leader>p", group = "Projects" },
@@ -49,6 +49,30 @@ return {
 					["<C-j>"] = false,
 					["<C-k>"] = false,
 				},
+			},
+		},
+	},
+
+	-- ToggleTerm: Persistent floating/split terminals for project shells and REPLs
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		cmd = {
+			"ToggleTerm",
+			"ToggleTermToggleAll",
+			"TermExec",
+			"TermNew",
+			"TermSelect",
+		},
+		keys = {
+			{ [[<C-\>]], "<cmd>ToggleTerm<cr>", mode = { "n", "t" }, desc = "Terminal: Toggle" },
+			{ "<leader>ot", "<cmd>ToggleTerm<cr>", desc = "Terminal: Toggle" },
+		},
+		opts = {
+			open_mapping = [[<C-\>]],
+			direction = "float",
+			float_opts = {
+				border = "curved",
 			},
 		},
 	},

@@ -91,5 +91,5 @@ vim.keymap.set("n", "<leader>dl", function() require("dap").run_last() end, { de
 
 
 -- Cheatsheet split window shortcuts
-vim.keymap.set("n", "<leader>hm", "<cmd>vsplit ~/.config/nvim/cheatsheet_motion.md<cr>", { desc = "Cheatsheet: Vim Motions" })
-vim.keymap.set("n", "<leader>hp", "<cmd>vsplit ~/.config/nvim/cheatsheet_plugins.md<cr>", { desc = "Cheatsheet: Plugins" })
+vim.keymap.set("n", "<leader>cm", "<cmd>vsplit ~/.config/nvim/cheatsheet_motion.md<cr>", { desc = "Cheatsheet: Vim Motions" })
+vim.keymap.set("n", "<leader>cp", "<cmd>vsplit ~/.config/nvim/cheatsheet_plugins.md<cr>", { desc = "Cheatsheet: Plugins" })
