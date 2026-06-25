@@ -116,6 +116,11 @@ return {
 				vim.keymap.set("n", "}", "<cmd>AerialNext<cr>", { buffer = bufnr, desc = "Aerial: Jump Next" })
 			end,
 			nerd_font = "auto",
+			layout = {
+				width = 35,
+				min_width = 28,
+				max_width = { 45, 0.35 },
+			},
 		},
 		keys = {
 			{ "<leader>co", "<cmd>AerialToggle! right<cr>", desc = "Code: Toggle Outline (Aerial)" },
