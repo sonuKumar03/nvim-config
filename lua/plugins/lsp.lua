@@ -343,7 +343,9 @@ return {
 						require("telescope.builtin").lsp_document_symbols()
 					end, "Open Document Symbols (Telescope)")
 					map("gW", function()
-						require("telescope.builtin").lsp_dynamic_workspace_symbols()
+						require("telescope.builtin").lsp_dynamic_workspace_symbols({
+							file_ignore_patterns = { "node_modules" },
+						})
 					end, "Open Workspace Symbols (Telescope)")
 					map("grt", function()
 						require("telescope.builtin").lsp_type_definitions()
