@@ -293,7 +293,24 @@ return {
 
 					map("gd", vim.lsp.buf.definition, "Goto Definition")
 					map("gD", vim.lsp.buf.declaration, "Goto Declaration") -- handled by vtsls
-					map("gr", vim.lsp.buf.references, "Goto References")
+					map("gr", function()
+						vim.lsp.buf.references(nil, {
+							on_list = function(options)
+								local filtered = {}
+								for _, item in ipairs(options.items) do
+									if not string.find(item.filename, "node_modules", 1, true) then
+										table.insert(filtered, item)
+									end
+								end
+								if #filtered == 0 then
+									vim.notify("No references found outside node_modules", vim.log.levels.INFO)
+									return
+								end
+								vim.fn.setqflist({}, " ", { title = options.title, items = filtered })
+								vim.api.nvim_command("copen")
+							end,
+						})
+					end, "Goto References")
 					map("gI", vim.lsp.buf.implementation, "Goto Implementation") -- handled by vtsls
 					map("gy", vim.lsp.buf.type_definition, "Type Definition")
 
@@ -312,7 +329,9 @@ return {
 
 					-- Telescope LSP bindings
 					map("grr", function()
-						require("telescope.builtin").lsp_references()
+						require("telescope.builtin").lsp_references({
+							file_ignore_patterns = { "node_modules" },
+						})
 					end, "Goto References (Telescope)")
 					map("gri", function()
 						require("telescope.builtin").lsp_implementations()
