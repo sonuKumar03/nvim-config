@@ -8,6 +8,19 @@ return {
 		config = function()
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			local angular = require("plugins.lsp.angular")
+			local function is_ts_filetype(bufnr)
+				local ft = vim.bo[bufnr].filetype
+				return ft == "typescript" or ft == "typescriptreact" or ft == "typescript.tsx"
+			end
+
+			local angular_disabled_ts_methods = {
+				["textDocument/declaration"] = true,
+				["textDocument/definition"] = true,
+				["textDocument/implementation"] = true,
+				["textDocument/references"] = true,
+				["textDocument/typeDefinition"] = true,
+			}
+
 			-- Server configurations table
 			local servers = {
 				lua_ls = {
@@ -156,11 +169,7 @@ return {
 					filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
 					root_dir = function(bufnr, on_dir)
 						local fname = vim.api.nvim_buf_get_name(bufnr)
-						local marker = vim.fs.find(
-							{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
-							{ path = fname, upward = true }
-						)[1]
-						local root = marker and vim.fs.dirname(marker) or nil
+						local root = angular.find_root(fname)
 						if root then
 							on_dir(root)
 						end
@@ -232,15 +241,15 @@ return {
 						if not client._supports_method_overridden then
 							client._supports_method_overridden = true
 							local orig_supports_method = client.supports_method
-							client.supports_method = function(method, opts)
-								if method == "textDocument/definition" then
-									local bufnr = opts and opts.bufnr or 0
-									local ft = vim.bo[bufnr].filetype
-									if ft == "typescript" or ft == "typescriptreact" or ft == "typescript.tsx" then
-										return false
-									end
+							client.supports_method = function(self, method, bufnr)
+								if type(bufnr) == "table" then
+									bufnr = bufnr.bufnr
 								end
-								return orig_supports_method(method, opts)
+								bufnr = bufnr or 0
+								if angular_disabled_ts_methods[method] and is_ts_filetype(bufnr) then
+									return false
+								end
+								return orig_supports_method(self, method, bufnr)
 							end
 						end
 					end

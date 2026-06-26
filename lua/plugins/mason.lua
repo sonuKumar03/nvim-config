@@ -7,6 +7,9 @@ return {
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
 			ensure_installed = { "angularls", "lua_ls", "pyright", "gopls", "vtsls" },
+			automatic_enable = {
+				exclude = { "ts_ls" },
+			},
 		},
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
