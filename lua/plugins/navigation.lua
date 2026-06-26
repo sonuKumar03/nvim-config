@@ -10,12 +10,49 @@ return {
 			"nvim-telescope/telescope-project.nvim",
 			"nvim-telescope/telescope-frecency.nvim",
 		},
-		config = function()
-			local telescope = require("telescope")
-			telescope.setup({
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
+			config = function()
+				local telescope = require("telescope")
+				telescope.setup({
+					defaults = {
+						file_ignore_patterns = {
+							"node_modules/",
+							"%.git/",
+							"%.nx/",
+							"dist/",
+							"build/",
+							"coverage/",
+							"%.angular/",
+							"tmp/",
+						},
+						vimgrep_arguments = {
+							"rg",
+							"--color=never",
+							"--no-heading",
+							"--with-filename",
+							"--line-number",
+							"--column",
+							"--smart-case",
+							"--glob",
+							"!**/node_modules/**",
+							"--glob",
+							"!**/.git/**",
+							"--glob",
+							"!**/.nx/**",
+							"--glob",
+							"!**/dist/**",
+							"--glob",
+							"!**/build/**",
+							"--glob",
+							"!**/coverage/**",
+							"--glob",
+							"!**/.angular/**",
+							"--glob",
+							"!**/tmp/**",
+						},
+					},
+					extensions = {
+						["ui-select"] = {
+							require("telescope.themes").get_dropdown({}),
 					},
 				},
 			})
