@@ -72,11 +72,14 @@ return {
 				vtsls = {
 					root_dir = function(bufnr, on_dir)
 						local fname = vim.api.nvim_buf_get_name(bufnr)
-						local marker = vim.fs.find(
-							{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
-							{ path = fname, upward = true }
-						)[1]
-						local root = marker and vim.fs.dirname(marker) or nil
+						local root = angular.find_root(fname)
+						if not root then
+							local marker = vim.fs.find(
+								{ "tsconfig.json", "package.json", "jsconfig.json", ".git" },
+								{ path = fname, upward = true }
+							)[1]
+							root = marker and vim.fs.dirname(marker) or nil
+						end
 						if root then
 							on_dir(root)
 						end
@@ -84,7 +87,7 @@ return {
 					settings = {
 						typescript = {
 							tsserver = {
-								maxTsServerMemory = 4096,
+								maxTsServerMemory = 8192,
 							},
 							referencesCodeLens = {
 								enabled = true,
@@ -156,6 +159,17 @@ return {
 							},
 						},
 						vtsls = {
+							autoUseWorkspaceTsdk = true,
+							watchOptions = {
+								excludeDirectories = {
+									"**/node_modules",
+									"**/dist",
+									"**/.angular",
+									"**/.nx",
+									"**/coverage",
+									"**/tmp",
+								},
+							},
 							experimental = {
 								completion = {
 									enableServerSideFuzzyMatch = true,
