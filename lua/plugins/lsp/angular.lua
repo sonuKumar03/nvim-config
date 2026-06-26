@@ -69,10 +69,40 @@ function M.resolve_ngserver_bin(root_dir)
 		.. "/mason/packages/angular-language-server/node_modules/@angular/language-server/bin/ngserver"
 end
 
-function M.resolve_probe_dir(root_dir)
-	local project_root = find_project_root(root_dir)
-	return project_root and (project_root .. "/node_modules") or resolve_mason_angular_lib_path()
+local function get_mason_node_modules()
+	local ok, registry = pcall(require, "mason-registry")
+	if ok then
+		local ok_package, pkg = pcall(registry.get_package, "angular-language-server")
+		if ok_package and pkg:is_installed() then
+			return pkg:get_install_path() .. "/node_modules"
+		end
+	end
+	return vim.fn.stdpath("data") .. "/mason/packages/angular-language-server/node_modules"
 end
+
+function M.resolve_ts_probe_locations(root_dir)
+	local project_root = find_project_root(root_dir)
+	local paths = {}
+	if project_root then
+		table.insert(paths, project_root .. "/node_modules")
+	end
+	table.insert(paths, get_mason_node_modules())
+	return table.concat(paths, ",")
+end
+
+function M.resolve_ng_probe_locations(root_dir)
+	local project_root = find_project_root(root_dir)
+	local paths = {}
+	if project_root then
+		table.insert(paths, project_root .. "/node_modules/@angular/language-server/node_modules")
+		table.insert(paths, project_root .. "/node_modules")
+	end
+	local mason_nm = get_mason_node_modules()
+	table.insert(paths, mason_nm .. "/@angular/language-server/node_modules")
+	table.insert(paths, mason_nm)
+	return table.concat(paths, ",")
+end
+
 
 function M.resolve_core_version(root_dir)
 	local project_root = find_project_root(root_dir)

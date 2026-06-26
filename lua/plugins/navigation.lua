@@ -94,12 +94,49 @@ return {
 			harpoon:setup({})
 		end,
 		keys = {
-			{ "<leader>ha", function() require("harpoon"):list():add() end, desc = "Harpoon: Add File" },
-			{ "<leader>hh", function() local harpoon = require("harpoon") harpoon.ui:toggle_quick_menu(harpoon:list()) end, desc = "Harpoon: List Menu" },
-			{ "<leader>h1", function() require("harpoon"):list():select(1) end, desc = "Harpoon: Go to File 1" },
-			{ "<leader>h2", function() require("harpoon"):list():select(2) end, desc = "Harpoon: Go to File 2" },
-			{ "<leader>h3", function() require("harpoon"):list():select(3) end, desc = "Harpoon: Go to File 3" },
-			{ "<leader>h4", function() require("harpoon"):list():select(4) end, desc = "Harpoon: Go to File 4" },
+			{
+				"<leader>ha",
+				function()
+					require("harpoon"):list():add()
+				end,
+				desc = "Harpoon: Add File",
+			},
+			{
+				"<leader>hh",
+				function()
+					local harpoon = require("harpoon")
+					harpoon.ui:toggle_quick_menu(harpoon:list())
+				end,
+				desc = "Harpoon: List Menu",
+			},
+			{
+				"<leader>h1",
+				function()
+					require("harpoon"):list():select(1)
+				end,
+				desc = "Harpoon: Go to File 1",
+			},
+			{
+				"<leader>h2",
+				function()
+					require("harpoon"):list():select(2)
+				end,
+				desc = "Harpoon: Go to File 2",
+			},
+			{
+				"<leader>h3",
+				function()
+					require("harpoon"):list():select(3)
+				end,
+				desc = "Harpoon: Go to File 3",
+			},
+			{
+				"<leader>h4",
+				function()
+					require("harpoon"):list():select(4)
+				end,
+				desc = "Harpoon: Go to File 4",
+			},
 		},
 	},
 
@@ -117,8 +154,8 @@ return {
 			end,
 			nerd_font = "auto",
 			layout = {
-				width = 35,
-				min_width = 28,
+				width = 55,
+				min_width = 40,
 				max_width = { 45, 0.35 },
 			},
 		},
@@ -127,4 +164,3 @@ return {
 		},
 	},
 }
-

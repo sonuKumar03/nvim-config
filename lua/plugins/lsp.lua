@@ -172,7 +172,8 @@ return {
 							{ path = fname, upward = true }
 						)[1]
 						local root_dir = marker and vim.fs.dirname(marker) or vim.fn.getcwd()
-						local probe_dir = angular.resolve_probe_dir(root_dir)
+						local ts_probe = angular.resolve_ts_probe_locations(root_dir)
+						local ng_probe = angular.resolve_ng_probe_locations(root_dir)
 						local angular_core_version = angular.resolve_core_version(root_dir)
 						local cmd = {
 							vim.fn.exepath("node"),
@@ -180,9 +181,9 @@ return {
 							angular.resolve_ngserver_bin(root_dir),
 							"--stdio",
 							"--tsProbeLocations",
-							probe_dir,
+							ts_probe,
 							"--ngProbeLocations",
-							probe_dir,
+							ng_probe,
 							"--angularCoreVersion",
 							angular_core_version,
 						}
