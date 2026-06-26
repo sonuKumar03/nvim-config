@@ -72,14 +72,31 @@ return {
 	},
 
 	-- Colorizer: Renders true colors inline in CSS, HSL, Hex values (e.g. #ff0077)
-	{
-		"NvChad/nvim-colorizer.lua",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			filetypes = { "*", "!lazy" }, -- Colorize all buffers except Lazy UI
-			user_default_options = {
-				RGB = true,
-				RRGGBB = true,
+		{
+			"NvChad/nvim-colorizer.lua",
+			event = { "BufReadPre", "BufNewFile" },
+			opts = {
+				filetypes = {
+					"css",
+					"scss",
+					"sass",
+					"less",
+					"html",
+					"htmlangular",
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+					"json",
+					"jsonc",
+					"yaml",
+					"toml",
+					"dockerfile",
+					"markdown",
+				},
+				user_default_options = {
+					RGB = true,
+					RRGGBB = true,
 				names = false, -- Don't highlight literal names like 'red' (keeps it clean)
 				RRGGBBAA = true,
 				AARRGGBB = true,

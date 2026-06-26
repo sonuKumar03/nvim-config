@@ -44,7 +44,7 @@ return {
 			}
 
 			local lint_group = vim.api.nvim_create_augroup("nvim-lint", { clear = true })
-			vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+			vim.api.nvim_create_autocmd("BufWritePost", {
 				group = lint_group,
 				callback = function()
 					lint.try_lint()
@@ -76,7 +76,7 @@ return {
 				"css-lsp",
 				"angular-language-server",
 			},
-			run_on_start = true,
+			run_on_start = false,
 			start_delay = 3000,
 			debounce_hours = 24,
 		},

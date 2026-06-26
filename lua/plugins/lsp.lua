@@ -117,6 +117,7 @@ return {
 								autoImportFileExcludePatterns = {
 									"**/dist/**",
 									"**/.nx/**",
+									"**/.angular/**",
 									"**/coverage/**",
 									"**/tmp/**",
 								},
@@ -148,6 +149,7 @@ return {
 								autoImportFileExcludePatterns = {
 									"**/dist/**",
 									"**/.nx/**",
+									"**/.angular/**",
 									"**/coverage/**",
 									"**/tmp/**",
 								},
