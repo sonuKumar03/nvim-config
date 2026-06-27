@@ -19,3 +19,13 @@ vim.api.nvim_create_autocmd("FileType", {
 		map("<leader>ltl", "<cmd>VimtexClean<cr>", "Clean Aux Files")
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+	group = vim.api.nvim_create_augroup("auto-reload-changed-files", { clear = true }),
+	callback = function()
+		if vim.fn.getcmdwintype() == "" then
+			vim.cmd("checktime")
+		end
+	end,
+})
+

@@ -98,6 +98,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		opts = {
+			close_if_last_window = true,
 			window = {
 				mappings = {
 					["l"] = "open",

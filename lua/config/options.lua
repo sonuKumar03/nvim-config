@@ -46,6 +46,7 @@ opt.updatetime = 250        -- Faster update time (defaults to 4000ms) for diagn
 opt.timeoutlen = 300        -- Timeout in milliseconds to wait for a mapped sequence to complete
 opt.confirm = true          -- Confirm to save changes before exiting modified buffer instead of failing
 opt.undofile = true         -- Enable persistent undo across editor restarts (default path created by Neovim)
+opt.autoread = true         -- Automatically read file when it has been changed externally
 
 -- Incremental command preview (shows substitute/search-replace effects live in a split buffer)
 opt.inccommand = "split"    
