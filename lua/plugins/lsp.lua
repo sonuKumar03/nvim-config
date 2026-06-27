@@ -316,7 +316,9 @@ return {
 
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
 					map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-					map("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
+					vim.keymap.set("n", "<leader>rn", function()
+						return ":IncRename " .. vim.fn.expand("<cword>")
+					end, { expr = true, buffer = ev.buf, desc = "LSP: Rename Symbol (Incremental)" })
 					map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 
 					map("<leader>cd", vim.diagnostic.open_float, "Line Diagnostics")

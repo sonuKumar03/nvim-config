@@ -173,4 +173,11 @@ return {
 			{ "<leader>qd", function() require("persistence").stop() end, desc = "Stop Saving Session" },
 		},
 	},
+
+	-- Sleuth: Automatically detect tabstop and shiftwidth from files
+	{
+		"tpope/vim-sleuth",
+		lazy = false, -- Needs to load early to inspect file indents when buffers open
+	},
 }
+

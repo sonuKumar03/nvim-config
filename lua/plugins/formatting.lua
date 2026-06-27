@@ -2,31 +2,93 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			formatters_by_ft = {
-				lua = { "stylua" },
-				javascript = { "prettierd", "prettier", stop_after_first = true },
-				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-				typescript = { "prettierd", "prettier", stop_after_first = true },
-				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-				python = { "ruff_format" },
-				go = { "goimports", "gofumpt" },
-				json = { "prettierd", "prettier", stop_after_first = true },
-				markdown = { "prettierd", "prettier", stop_after_first = true },
-				html = { "prettierd", "prettier", stop_after_first = true },
-				css = { "prettierd", "prettier", stop_after_first = true },
-				scss = { "prettierd", "prettier", stop_after_first = true },
-			},
-			default_format_opts = {
-				lsp_format = "fallback",
-			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_format = "fallback",
-			},
-			notify_on_error = true,
-			notify_no_formatters = true,
-		},
+		opts = function()
+			-- Helper function to detect local project-level Prettier configurations
+			local function has_prettier_config(ctx)
+				local config_files = {
+					".prettierrc",
+					".prettierrc.json",
+					".prettierrc.yml",
+					".prettierrc.yaml",
+					".prettierrc.json5",
+					".prettierrc.js",
+					".prettierrc.cjs",
+					".prettierrc.mjs",
+					"prettier.config.js",
+					"prettier.config.cjs",
+					"prettier.config.mjs",
+				}
+				if vim.fs.find(config_files, { path = ctx.filename, upward = true })[1] then
+					return true
+				end
+				local package_json = vim.fs.find("package.json", { path = ctx.filename, upward = true })[1]
+				if package_json then
+					local file = io.open(package_json, "r")
+					if file then
+						local content = file:read("*a")
+						file:close()
+						local ok, data = pcall(vim.json.decode, content)
+						if ok and data and data.prettier then
+							return true
+						end
+					end
+				end
+				return false
+			end
+
+			local function get_prettier_args(self, ctx)
+				if not has_prettier_config(ctx) then
+					local global_config = vim.fn.stdpath("config") .. "/prettier.config.js"
+					if vim.uv.fs_stat(global_config) then
+						return { "--config", global_config }
+					end
+				end
+				return {}
+			end
+
+			local function prettier_or_fallback(bufnr)
+				local fname = vim.api.nvim_buf_get_name(bufnr)
+				if has_prettier_config({ filename = fname }) then
+					return { "prettierd", "prettier", stop_after_first = true }
+				else
+					return { "prettier" }
+				end
+			end
+
+			return {
+				formatters_by_ft = {
+					lua = { "stylua" },
+					javascript = prettier_or_fallback,
+					javascriptreact = prettier_or_fallback,
+					typescript = prettier_or_fallback,
+					typescriptreact = prettier_or_fallback,
+					python = { "ruff_format" },
+					go = { "goimports", "gofumpt" },
+					json = prettier_or_fallback,
+					markdown = prettier_or_fallback,
+					html = prettier_or_fallback,
+					css = prettier_or_fallback,
+					scss = prettier_or_fallback,
+				},
+				default_format_opts = {
+					lsp_format = "fallback",
+				},
+				format_on_save = {
+					timeout_ms = 500,
+					lsp_format = "fallback",
+				},
+				notify_on_error = true,
+				notify_no_formatters = true,
+				formatters = {
+					prettier = {
+						prepend_args = get_prettier_args,
+					},
+					prettierd = {
+						prepend_args = get_prettier_args,
+					},
+				},
+			}
+		end,
 	},
 	{
 		"mfussenegger/nvim-lint",

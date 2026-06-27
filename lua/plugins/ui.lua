@@ -161,4 +161,12 @@ return {
 			},
 		},
 	},
+
+	-- Incremental Rename: Preview LSP renames inline in real-time
+	{
+		"smjonas/inc-rename.nvim",
+		cmd = "IncRename",
+		opts = {},
+	},
 }
+
