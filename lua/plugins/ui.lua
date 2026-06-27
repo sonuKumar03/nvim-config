@@ -40,6 +40,26 @@ return {
 				globalstatus = true, -- Single statusline for all windows instead of split bars
 				icons_enabled = true,
 			},
+			sections = {
+				lualine_x = {
+					{
+						function()
+							local venv = vim.env.VIRTUAL_ENV
+							if venv then
+								return "󰌠 " .. vim.fn.fnamemodify(venv, ":t")
+							end
+							return ""
+						end,
+						cond = function()
+							return vim.bo.filetype == "python"
+						end,
+						color = { fg = "#ffcf1a" }, -- Sleek yellow/gold color for Python
+					},
+					"encoding",
+					"fileformat",
+					"filetype",
+				},
+			},
 		},
 	},
 
