@@ -201,4 +201,22 @@ return {
 			{ "<leader>co", "<cmd>AerialToggle! right<cr>", desc = "Code: Toggle Outline (Aerial)" },
 		},
 	},
+
+	-- Vim-Tmux-Navigator: Seamless navigation between Vim and Tmux splits
+	{
+		"christoomey/vim-tmux-navigator",
+		cmd = {
+			"TmuxNavigateLeft",
+			"TmuxNavigateDown",
+			"TmuxNavigateUp",
+			"TmuxNavigateRight",
+			"TmuxNavigatePrevious",
+		},
+		keys = {
+			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>", desc = "Pane: Navigate Left" },
+			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>", desc = "Pane: Navigate Down" },
+			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>", desc = "Pane: Navigate Up" },
+			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>", desc = "Pane: Navigate Right" },
+		},
+	},
 }

@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
 	group = vim.api.nvim_create_augroup("auto-reload-changed-files", { clear = true }),
 	callback = function()
 		if vim.fn.getcmdwintype() == "" then
@@ -35,5 +35,4 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
 		vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.INFO)
 	end,
 })
-
 

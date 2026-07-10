@@ -10,7 +10,7 @@ return {
 			local angular = require("plugins.lsp.angular")
 			local function is_ts_filetype(bufnr)
 				local ft = vim.bo[bufnr].filetype
-				return ft == "typescript" or ft == "typescriptreact" or ft == "typescript.tsx"
+				return ft == "typescript" or ft == "typescriptreact"
 			end
 
 			local angular_disabled_ts_methods = {
@@ -182,7 +182,7 @@ return {
 				},
 				texlab = {},
 				angularls = {
-					filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx", "htmlangular" },
+					filetypes = { "typescript", "html", "typescriptreact", "htmlangular" },
 					root_dir = function(bufnr, on_dir)
 						local fname = vim.api.nvim_buf_get_name(bufnr)
 						local root = angular.find_root(fname)
@@ -271,7 +271,7 @@ return {
 					end
 
 					-- Toggle inlay hints in insert mode to eliminate typing lag
-					if client and client.supports_method("textDocument/inlayHint") then
+					if client and client:supports_method("textDocument/inlayHint", ev.buf) then
 						vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
 						vim.api.nvim_create_autocmd("InsertEnter", {
 							buffer = ev.buf,
@@ -315,7 +315,7 @@ return {
 					map("gy", vim.lsp.buf.type_definition, "Type Definition")
 
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
-					map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+					map("<leader>lk", vim.lsp.buf.signature_help, "Signature Help")
 					vim.keymap.set("n", "<leader>rn", function()
 						return ":IncRename " .. vim.fn.expand("<cword>")
 					end, { expr = true, buffer = ev.buf, desc = "LSP: Rename Symbol (Incremental)" })

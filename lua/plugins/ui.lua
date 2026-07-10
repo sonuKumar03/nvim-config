@@ -169,7 +169,6 @@ return {
 			{ "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Buffer: Next" },
 			{ "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Buffer: Prev" },
 			{ "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "Buffer: Pick" },
-			{ "<leader>bd", "<cmd>bdelete<cr>", desc = "Buffer: Delete" },
 		},
 		opts = {
 			options = {
@@ -189,4 +188,3 @@ return {
 		opts = {},
 	},
 }
-

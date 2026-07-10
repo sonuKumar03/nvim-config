@@ -27,6 +27,16 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 
 ---
 
+## Pane Navigation (vim-tmux-navigator)
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `<C-h>` | Navigate Left | Move to the Neovim split or tmux pane on the left. |
+| `<C-j>` | Navigate Down | Move to the Neovim split or tmux pane below. |
+| `<C-k>` | Navigate Up | Move to the Neovim split or tmux pane above. |
+| `<C-l>` | Navigate Right | Move to the Neovim split or tmux pane on the right. |
+
+---
+
 ## 2. Searching & Finding (Telescope)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
@@ -60,7 +70,7 @@ These keymaps are registered automatically on buffers where a Language Server is
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `K` | Hover Doc | View signature and docs for symbol under cursor. |
-| `<C-k>` | Signature Help | View parameter hints for functions. |
+| `<leader>lk` | Signature Help | View parameter hints for functions. |
 | `<leader>rn` | Rename Symbol | Rename all occurrences of variable/function across project. |
 | `<leader>ca` | Code Action | Run quickfixes/suggestions for diagnostic errors. |
 | `<leader>cf` | Format Buffer | Format the current file using `conform.nvim` (LSP/Prettier). |

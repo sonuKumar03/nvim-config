@@ -154,6 +154,10 @@ Vim keeps a history of places your cursor has jumped (e.g. using search, `G`, li
 *   `I` / `A`: Insert at start of line / Append at end of line.
 *   `o` / `O`: Insert new line below current line / Insert new line above current line.
 
+### Moving Lines
+*   `Alt + j`: Move the current line, or Visual-mode selection, down.
+*   `Alt + k`: Move the current line, or Visual-mode selection, up.
+
 ### Deleting & Replacing
 *   `x`: Delete character under cursor.
 *   `r{char}`: Replace the character under the cursor with `{char}` (remains in Normal mode).
