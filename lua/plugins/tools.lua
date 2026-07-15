@@ -96,7 +96,7 @@ return {
 				vim.schedule(function()
 					local buf = vim.api.nvim_create_buf(false, true)
 					vim.api.nvim_buf_set_lines(buf, 0, -1, false, output)
-					vim.api.nvim_open_win(buf, true, {
+					local win = vim.api.nvim_open_win(buf, true, {
 						relative = "editor",
 						width = math.floor(vim.o.columns * 0.7),
 						height = math.floor(vim.o.lines * 0.6),
@@ -108,6 +108,13 @@ return {
 					vim.bo[buf].bufhidden = "wipe"
 					vim.bo[buf].modifiable = false
 					vim.api.nvim_buf_set_name(buf, ("LeetCode run [%d]"):format(code))
+					local close_output = function()
+						if vim.api.nvim_win_is_valid(win) then
+							vim.api.nvim_win_close(win, true)
+						end
+					end
+					vim.keymap.set("n", "q", close_output, { buffer = buf, silent = true, desc = "Close output" })
+					vim.keymap.set("n", "<Esc>", close_output, { buffer = buf, silent = true, desc = "Close output" })
 				end)
 			end
 
@@ -187,32 +194,84 @@ return {
 				run_python(path)
 			end, {})
 
-			vim.api.nvim_create_user_command("LeetCodeJavaScratch", function()
-				vim.cmd("enew")
+			local java_class_name = function(raw_name)
+				local class_name = raw_name:gsub("[^%w_]", "_")
+				if class_name == "" then
+					return nil
+				end
+				if class_name:match("^%d") then
+					class_name = "Problem" .. class_name
+				end
+				return class_name
+			end
+
+			local java_scratch = function(opts)
+				local name = opts and vim.trim(opts.args or "") or ""
+				if name == "" then
+					name = vim.fn.input("Java file name [Main.java]: ", "", "file")
+					if name == "" then
+						name = "Main.java"
+					end
+				end
+				if not name:match("%.java$") then
+					name = name .. ".java"
+				end
+
+				local requested_path = vim.fn.fnamemodify(name, ":p")
+				local parent = vim.fn.fnamemodify(requested_path, ":h")
+				local requested_base = vim.fn.fnamemodify(requested_path, ":t:r")
+				local class_name = java_class_name(requested_base)
+				if not class_name then
+					vim.notify("Java scratch needs a file name", vim.log.levels.WARN)
+					return
+				end
+
+				local path = parent .. "/" .. class_name .. ".java"
+				if path ~= requested_path then
+					vim.notify(("Using Java-safe file name: %s"):format(vim.fn.fnamemodify(path, ":t")), vim.log.levels.INFO)
+				end
+				local exists = vim.uv.fs_stat(path) ~= nil
+				vim.fn.mkdir(parent, "p")
+				vim.cmd("edit " .. vim.fn.fnameescape(path))
+				vim.bo.modifiable = true
 				vim.bo.buftype = ""
 				vim.bo.bufhidden = "hide"
 				vim.bo.swapfile = false
 				vim.bo.filetype = "java"
+				local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+				if exists and (#lines > 1 or lines[1] ~= "") then
+					vim.notify(("Opened existing Java file: %s"):format(path), vim.log.levels.INFO)
+					return
+				end
 				vim.api.nvim_buf_set_lines(0, 0, -1, false, {
 					"import java.util.*;",
 					"",
-					"class Solution {",
+					("public class %s {"):format(class_name),
+					"",
+					"    static class Solution {",
+					"    }",
+					"",
 					"    public static void main(String[] args) {",
 					"        Solution solution = new Solution();",
 					"    }",
 					"}",
 					"",
 				})
-			end, {})
+			end
 
-			vim.api.nvim_create_user_command("LeetCodeJavaRun", function()
+			local java_run = function()
 				local path = vim.api.nvim_buf_get_name(0)
 				if path == "" then
 					vim.notify("Save the file before running", vim.log.levels.WARN)
 					return
 				end
 				run_java(path)
-			end, {})
+			end
+
+			vim.api.nvim_create_user_command("LeetCodeJavaScratch", java_scratch, { nargs = "*", complete = "file" })
+			vim.api.nvim_create_user_command("LeetCodeJavaRun", java_run, {})
+			vim.api.nvim_create_user_command("LCJ", java_scratch, { nargs = "*", complete = "file" })
+			vim.api.nvim_create_user_command("LCJR", java_run, {})
 		end,
 	},
 

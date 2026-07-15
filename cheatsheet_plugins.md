@@ -188,8 +188,8 @@ For Go files, `neotest-go` supports table-driven tests. Use `<leader>tr` for the
 ## Java LeetCode Helpers
 | Command | Action | Description |
 | :--- | :--- | :--- |
-| `:LeetCodeJavaScratch` | Java Scratch | Open a blank Java `Solution` buffer with imports and a `main` method. |
-| `:LeetCodeJavaRun` | Run Java File | Compile the current Java file with `javac` and run the detected class from a temp build directory. |
+| `:LCJ [name]` / `:LeetCodeJavaScratch [name]` | Java Scratch | Open a Java-safe file name with a matching public outer class and an empty nested `Solution` class. |
+| `:LCJR` / `:LeetCodeJavaRun` | Run Java File | Compile the current Java file with `javac` and run the detected class from a temp build directory. |
 
 ---
 
