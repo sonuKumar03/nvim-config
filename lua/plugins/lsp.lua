@@ -62,7 +62,16 @@ return {
 							completeUnimported = true,
 							usePlaceholders = true,
 							staticcheck = true,
+							codelenses = {
+								generate = true,
+								gc_details = true,
+								test = true,
+								tidy = true,
+								upgrade_dependency = true,
+							},
 							analyses = {
+								nilness = true,
+								shadow = true,
 								unusedparams = true,
 								unusedwrite = true,
 							},

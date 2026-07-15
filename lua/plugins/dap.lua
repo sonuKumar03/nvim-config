@@ -47,7 +47,35 @@ return {
 		},
 		ft = "go",
 		config = function()
-			require("dap-go").setup()
+			require("dap-go").setup({
+				dap_configurations = {
+					{
+						type = "go",
+						name = "Debug package (no optimizations)",
+						request = "launch",
+						mode = "debug",
+						program = "${fileDirname}",
+						buildFlags = "-gcflags=all=-N -l",
+					},
+					{
+						type = "go",
+						name = "Debug test (no optimizations)",
+						request = "launch",
+						mode = "test",
+						program = "${file}",
+						buildFlags = "-gcflags=all=-N -l",
+					},
+					{
+						type = "go",
+						name = "Debug test (race detector)",
+						request = "launch",
+						mode = "test",
+						program = "${file}",
+						buildFlags = "-race",
+					},
+				},
+			}
+		)
 		end,
 	},
 	{

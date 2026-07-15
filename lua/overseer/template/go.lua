@@ -29,6 +29,36 @@ return {
 				end,
 			},
 			{
+				name = "Go: test all (race)",
+				builder = function()
+					return {
+						cmd = { "go", "test", "-race", "./..." },
+						cwd = root,
+						components = { "default" },
+					}
+				end,
+			},
+			{
+				name = "Go: test all (coverage)",
+				builder = function()
+					return {
+						cmd = { "go", "test", "-coverprofile=coverage.out", "./..." },
+						cwd = root,
+						components = { "default" },
+					}
+				end,
+			},
+			{
+				name = "Go: vet all",
+				builder = function()
+					return {
+						cmd = { "go", "vet", "./..." },
+						cwd = root,
+						components = { "default" },
+					}
+				end,
+			},
+			{
 				name = "Go: build all",
 				builder = function()
 					return {

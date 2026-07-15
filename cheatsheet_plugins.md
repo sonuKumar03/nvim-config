@@ -179,6 +179,8 @@ These keymaps are registered automatically on buffers where a Language Server is
 | `<leader>tO` | Toggle Output Panel | Open/close full terminal output pane at the bottom. |
 | `<leader>tS` | Toggle Summary | Open/close side panel showing passing/failing test tree. |
 
+For Go files, `neotest-go` supports table-driven tests. Use `<leader>tr` for the nearest test, or `<leader>ts` for the full suite.
+
 ---
 
 ## 9. Debugging (DAP - Debug Adapter Protocol)
@@ -195,6 +197,8 @@ These keymaps are registered automatically on buffers where a Language Server is
 | `<leader>dO` | Step Out | Execute up to the end of the current function. |
 | `<leader>dl` | Debug Last Run | Re-execute the last debug run. |
 
+Go DAP also provides configurations for debugging the current package, the current test without optimizations, and a race-detector test run. Select them from the DAP launch configuration prompt after opening a Go file.
+
 ---
 
 ## 10. Tasks
@@ -203,6 +207,9 @@ These keymaps are registered automatically on buffers where a Language Server is
 | `<leader>oo` | Overseer Open | Open task list panel (compilation/runner tasks). |
 | `<leader>oO` | Overseer Toggle | Toggle the task panel visibility. |
 | `<leader>or` | Overseer Run | Open task runner template menu to choose a template. |
+|  | Go: test all (race) | Run `go test -race ./...` from the module root. |
+|  | Go: test all (coverage) | Run the suite and write `coverage.out`. |
+|  | Go: vet all | Run `go vet ./...` from the module root. |
 | `<leader>ot` | Toggle Terminal | Open/close the floating ToggleTerm terminal. |
 | `<C-\>` | Toggle Terminal | Fast terminal toggle from Normal or Terminal mode. |
 
