@@ -78,6 +78,43 @@ return {
 						},
 					},
 				},
+				jdtls = {
+					root_dir = function(bufnr, on_dir)
+						local fname = vim.api.nvim_buf_get_name(bufnr)
+						local start = fname ~= "" and fname or vim.fn.getcwd()
+						local marker = vim.fs.find(
+							{ "gradlew", "mvnw", "pom.xml", "build.gradle", "build.gradle.kts", ".git" },
+							{ path = start, upward = true }
+						)[1]
+						local root = marker and vim.fs.dirname(marker)
+							or (fname ~= "" and vim.fs.dirname(fname) or vim.fn.getcwd())
+						if root then
+							on_dir(root)
+						end
+					end,
+					settings = {
+						java = {
+							signatureHelp = {
+								enabled = true,
+							},
+							contentProvider = {
+								preferred = "fernflower",
+							},
+							completion = {
+								favoriteStaticMembers = {
+									"java.util.Collections.*",
+									"java.util.stream.Collectors.*",
+								},
+							},
+							sources = {
+								organizeImports = {
+									starThreshold = 9999,
+									staticStarThreshold = 9999,
+								},
+							},
+						},
+					},
+				},
 				vtsls = {
 					root_dir = function(bufnr, on_dir)
 						local fname = vim.api.nvim_buf_get_name(bufnr)

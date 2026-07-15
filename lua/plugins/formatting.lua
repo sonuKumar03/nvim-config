@@ -60,6 +60,7 @@ return {
 					lua = { "stylua" },
 					javascript = prettier_or_fallback,
 					javascriptreact = prettier_or_fallback,
+					java = {},
 					typescript = prettier_or_fallback,
 					typescriptreact = prettier_or_fallback,
 					python = { "ruff_format" },

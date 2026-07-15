@@ -13,6 +13,7 @@ return {
 				"markdown_inline",
 				"typescript",
 				"javascript",
+				"java",
 				"python",
 				"go",
 				"json",

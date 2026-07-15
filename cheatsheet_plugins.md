@@ -66,6 +66,8 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 ## 4. Language Server (LSP) & Navigation
 These keymaps are registered automatically on buffers where a Language Server is attached.
 
+Java files use `jdtls` for completion, diagnostics, imports, navigation, and LSP formatting. For single-file LeetCode practice, the Java LSP falls back to the current file directory when no Maven, Gradle, or Git project root exists.
+
 ### Code Actions & Details
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
@@ -180,6 +182,14 @@ These keymaps are registered automatically on buffers where a Language Server is
 | `<leader>tS` | Toggle Summary | Open/close side panel showing passing/failing test tree. |
 
 For Go files, `neotest-go` supports table-driven tests. Use `<leader>tr` for the nearest test, or `<leader>ts` for the full suite.
+
+---
+
+## Java LeetCode Helpers
+| Command | Action | Description |
+| :--- | :--- | :--- |
+| `:LeetCodeJavaScratch` | Java Scratch | Open a blank Java `Solution` buffer with imports and a `main` method. |
+| `:LeetCodeJavaRun` | Run Java File | Compile the current Java file with `javac` and run the detected class from a temp build directory. |
 
 ---
 
