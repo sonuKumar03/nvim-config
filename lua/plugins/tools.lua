@@ -296,8 +296,6 @@ return {
 			vim.api.nvim_create_user_command("LCPR", python_run, {})
 			vim.api.nvim_create_user_command("LeetCodeJavaScratch", java_scratch, { nargs = "*", complete = "file" })
 			vim.api.nvim_create_user_command("LeetCodeJavaRun", java_run, {})
-			vim.api.nvim_create_user_command("LCJ", java_scratch, { nargs = "*", complete = "file" })
-			vim.api.nvim_create_user_command("LCJR", java_run, {})
 		end,
 	},
 

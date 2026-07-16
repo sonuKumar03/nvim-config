@@ -177,8 +177,8 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
 ## Java LeetCode Helpers
 | Command | Action | Description |
 | :--- | :--- | :--- |
-| `:LCJ [name]` / `:LeetCodeJavaScratch [name]` | Java Scratch | Open a Java-safe file name with a matching public outer class and an empty nested `Solution` class. |
-| `:LCJR` / `:LeetCodeJavaRun` | Run Java File | Compile the current Java file with `javac` and run the detected class from a temp build directory. |
+| `:LeetCodeJavaScratch [name]` | Java Scratch | Open a Java-safe file name with a matching public outer class and an empty nested `Solution` class. |
+| `:LeetCodeJavaRun` | Run Java File | Compile the current Java file with `javac` and run the detected class from a temp build directory. |
 
 ---
 
