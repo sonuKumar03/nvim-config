@@ -74,10 +74,16 @@ return {
 				default_format_opts = {
 					lsp_format = "fallback",
 				},
-				format_on_save = {
-					timeout_ms = 500,
-					lsp_format = "fallback",
-				},
+				format_on_save = function(bufnr)
+					if vim.bo[bufnr].filetype == "java" then
+						-- Keep Java save lightweight for LeetCode scratch files; use manual LSP formatting when needed.
+						return nil
+					end
+					return {
+						timeout_ms = 500,
+						lsp_format = "fallback",
+					}
+				end,
 				notify_on_error = true,
 				notify_no_formatters = true,
 				formatters = {

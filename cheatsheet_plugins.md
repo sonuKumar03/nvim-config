@@ -66,7 +66,7 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 ## 4. Language Server (LSP) & Navigation
 These keymaps are registered automatically on buffers where a Language Server is attached.
 
-Java files use `jdtls` for completion, diagnostics, imports, navigation, and LSP formatting. For single-file LeetCode practice, the Java LSP falls back to the current file directory when no Maven, Gradle, or Git project root exists.
+Java files use `jdtls` for completion, diagnostics, imports, navigation, and manual LSP formatting. Java format-on-save is disabled to keep LeetCode scratch files lightweight. For single-file LeetCode practice, the Java LSP falls back to the current file directory when no Maven or Gradle project root exists.
 
 ### Code Actions & Details
 | Keymap | Action | Description |
@@ -167,24 +167,6 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and LSP
     *   `<leader>cb` - Choose **b**oth changes.
     *   `<leader>cn` - Choose **n**one.
 
----
-
-## 8. Testing (Neotest)
-| Keymap | Action | Description |
-| :--- | :--- | :--- |
-| `<leader>tr` | Run Nearest | Run the test block closest to the cursor. |
-| `<leader>tf` | Run File | Run all tests in the current file. |
-| `<leader>ts` | Run Suite | Run the entire test suite in project workspace. |
-| `<leader>td` | Debug Nearest | Start debugger attached to the nearest test block. |
-| `<leader>tt` | Stop Test | Stop running tests. |
-| `<leader>to` | Output Hover | Show output of the test under cursor in hover window. |
-| `<leader>tO` | Toggle Output Panel | Open/close full terminal output pane at the bottom. |
-| `<leader>tS` | Toggle Summary | Open/close side panel showing passing/failing test tree. |
-
-For Go files, `neotest-go` supports table-driven tests. Use `<leader>tr` for the nearest test, or `<leader>ts` for the full suite.
-
----
-
 ## Java LeetCode Helpers
 | Command | Action | Description |
 | :--- | :--- | :--- |
@@ -193,25 +175,7 @@ For Go files, `neotest-go` supports table-driven tests. Use `<leader>tr` for the
 
 ---
 
-## 9. Debugging (DAP - Debug Adapter Protocol)
-| Keymap | Action | Description |
-| :--- | :--- | :--- |
-| `<leader>db` | Toggle Breakpoint | Place/remove debug breakpoint on current line. |
-| `<leader>dB` | Conditional Breakpoint | Prompt for conditional logic to trigger breakpoint. |
-| `<leader>dc` | Debug Continue | Start debugging or continue execution to next breakpoint. |
-| `<leader>dr` | Debug REPL | Open the debugging console. |
-| `<leader>du` | Toggle Debug UI | Open/close full panels (Variables, Watches, Call Stack, etc.). |
-| `<leader>dt` | Terminate Session | Stop the debugging process. |
-| `<leader>di` | Step Into | Step inside function under cursor. |
-| `<leader>do` | Step Over | Step onto the next statement in execution. |
-| `<leader>dO` | Step Out | Execute up to the end of the current function. |
-| `<leader>dl` | Debug Last Run | Re-execute the last debug run. |
-
-Go DAP also provides configurations for debugging the current package, the current test without optimizations, and a race-detector test run. Select them from the DAP launch configuration prompt after opening a Go file.
-
----
-
-## 10. Tasks
+## 9. Tasks
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `<leader>oo` | Overseer Open | Open task list panel (compilation/runner tasks). |

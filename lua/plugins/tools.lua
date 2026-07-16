@@ -6,7 +6,6 @@ return {
 		opts = {
 			spec = {
 				{ "<leader>c", group = "Code" },
-				{ "<leader>d", group = "Debug" },
 				{ "<leader>b", group = "Buffers" },
 				{ "<leader>f", group = "Find" },
 				{ "<leader>g", group = "Git" },
@@ -16,7 +15,6 @@ return {
 				{ "<leader>p", group = "Projects" },
 				{ "<leader>q", group = "Session / Quit" },
 				{ "<leader>s", group = "Search / Replace" },
-				{ "<leader>t", group = "Tests" },
 				{ "<leader>u", group = "Toggles / Options" },
 				{ "<leader>x", group = "Diagnostics" },
 			},
@@ -43,7 +41,6 @@ return {
 			"OverseerTaskAction",
 		},
 		opts = {
-			dap = false,
 			task_list = {
 				keymaps = {
 					["<C-j>"] = false,

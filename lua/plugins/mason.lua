@@ -8,7 +8,7 @@ return {
 		opts = {
 			ensure_installed = { "angularls", "lua_ls", "pyright", "gopls", "jdtls", "vtsls" },
 			automatic_enable = {
-				exclude = { "ts_ls" },
+				exclude = { "jdtls", "ts_ls" },
 			},
 		},
 		dependencies = {
