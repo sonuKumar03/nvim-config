@@ -167,6 +167,13 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
     *   `<leader>cb` - Choose **b**oth changes.
     *   `<leader>cn` - Choose **n**one.
 
+## Python LeetCode Helpers
+| Command | Action | Description |
+| :--- | :--- | :--- |
+| `:LCP [name]` / `:LeetCodePythonScratch [name]` | Python Scratch | Open a named Python LeetCode file with a `Solution` class and `__main__` harness. |
+| `:LCPR` / `:LeetCodePythonRun` | Run Python File | Run the current saved Python file with `python3` from its directory. |
+| `:LeetCodeScratch [name]` / `:LeetCodeRun` | Legacy Aliases | Backward-compatible aliases for the Python scratch and run commands. |
+
 ## Java LeetCode Helpers
 | Command | Action | Description |
 | :--- | :--- | :--- |
