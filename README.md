@@ -63,7 +63,7 @@ Need help remembering keys? Check out these detailed references:
 ### Git
 
 - `<leader>gg` opens LazyGit
-- `<leader>gO` opens Diffview
+- `<leader>gv` opens Diffview
 - `<leader>gC` closes Diffview
 - `<leader>gF` opens file history
 - `<leader>gH` opens current-file history

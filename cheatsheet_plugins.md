@@ -154,7 +154,7 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
 ### Code Diffs (Diffview)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
-| `<leader>gO` | Open Diffview | Open side-by-side git diff interface for the repo. |
+| `<leader>gv` | Open Diffview | Open side-by-side git diff interface for the repo. |
 | `<leader>gC` | Close Diffview | Close the diff view and return to standard editor layout. |
 | `<leader>gF` | File History | Open commit history search for the repository. |
 | `<leader>gH` | Current File History | Open commit history specifically for the current active file. |

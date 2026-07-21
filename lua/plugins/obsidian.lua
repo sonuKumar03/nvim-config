@@ -4,8 +4,8 @@ return {
 	lazy = true,
 	-- Load on markdown files inside the vault, or when running obsidian commands
 	event = {
-		"BufReadPre " .. vim.fn.expand("~") .. "/notes/**/*.md",
-		"BufNewFile " .. vim.fn.expand("~") .. "/notes/**/*.md",
+		{ event = "BufReadPre", pattern = vim.fn.expand("~") .. "/notes/**/*.md" },
+		{ event = "BufNewFile", pattern = vim.fn.expand("~") .. "/notes/**/*.md" },
 	},
 	cmd = {
 		"ObsidianNew",
