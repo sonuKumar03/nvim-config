@@ -114,6 +114,27 @@ Text objects allow you to operate on structured code blocks (like quotes, parent
 | `[`, `]` | Brackets | `di[` (delete inside brackets) |
 | `t` | HTML/XML Tag | `cit` (change content inside tag), `dat` (delete entire tag element) |
 
+### Treesitter Code Objects
+
+These mappings work in supported languages with a Treesitter parser installed.
+
+| Key | Action | Description / Tip |
+| :---: | :--- | :--- |
+| `vif` | Select inside function | Select the function body without the function declaration. |
+| `vaf` | Select entire function | Select the function, including its declaration. |
+| `vic` | Select inside class | Select the class contents without the class declaration. |
+| `vac` | Select entire class | Select the class, including its declaration. |
+
+### Surround Editing (nvim-surround)
+
+| Key | Action | Description / Tip |
+| :---: | :--- | :--- |
+| `ys{motion}{char}` | Add surrounding | Surround the text covered by a motion. Example: `ysiw]` wraps the word in `[]`. |
+| `yss{char}` | Surround line | Surround the entire current line. |
+| `S{char}` | Surround selection | In Visual mode, select text and press `S`, then the surrounding character. |
+| `cs{old}{new}` | Change surrounding | Replace one surrounding pair with another. Example: `cs([` changes `(...)` to `[...]`. |
+| `ds{char}` | Delete surrounding | Remove a surrounding pair. Example: `ds(` removes parentheses. |
+
 ---
 
 ## 5. Search & Replace
