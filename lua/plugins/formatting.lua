@@ -143,7 +143,7 @@ return {
 				"marksman",
 				"html-lsp",
 				"css-lsp",
-				"angular-language-server",
+				{ "angular-language-server", version = "20.3.0" },
 			},
 			run_on_start = false,
 			start_delay = 3000,
