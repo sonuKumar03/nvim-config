@@ -44,17 +44,6 @@ return {
 						},
 					},
 				},
-				pyright = {
-					settings = {
-						python = {
-							analysis = {
-								autoSearchPaths = true,
-								useLibraryCodeForTypes = true,
-								diagnosticMode = "workspace",
-							},
-						},
-					},
-				},
 				gopls = {
 					settings = {
 						gopls = {
@@ -225,6 +214,8 @@ return {
 					end,
 				},
 				jsonls = {},
+				dockerls = {},
+				yamlls = {},
 				marksman = {},
 				html = {
 					-- Prevent collision: If in an Angular project, angularls handles HTML templates
@@ -329,7 +320,6 @@ return {
 						return ":IncRename " .. vim.fn.expand("<cword>")
 					end, { expr = true, buffer = ev.buf, desc = "LSP: Rename Symbol (Incremental)" })
 					map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-
 					map("<leader>cd", vim.diagnostic.open_float, "Line Diagnostics")
 					map("[d", function()
 						vim.diagnostic.jump({ count = -1, float = true })

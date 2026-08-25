@@ -63,9 +63,9 @@ return {
 					java = {},
 					typescript = prettier_or_fallback,
 					typescriptreact = prettier_or_fallback,
-					python = { "ruff_format" },
 					go = { "goimports", "gofumpt" },
 					json = prettier_or_fallback,
+					yaml = prettier_or_fallback,
 					markdown = prettier_or_fallback,
 					html = prettier_or_fallback,
 					css = prettier_or_fallback,
@@ -76,7 +76,7 @@ return {
 				},
 				format_on_save = function(bufnr)
 					if vim.bo[bufnr].filetype == "java" then
-						-- Keep Java save lightweight for LeetCode scratch files; use manual LSP formatting when needed.
+						-- Keep Java save lightweight; use manual LSP formatting when needed.
 						return nil
 					end
 					return {
@@ -108,7 +108,6 @@ return {
 				javascriptreact = { "eslint_d" },
 				typescript = { "eslint_d" },
 				typescriptreact = { "eslint_d" },
-				python = { "ruff" },
 				go = { "golangcilint" },
 			}
 
@@ -134,12 +133,13 @@ return {
 				"prettierd",
 				"prettier",
 				"eslint_d",
-				"ruff",
 				"goimports",
 				"gofumpt",
 				"golangci-lint",
 				"texlab",
 				"json-lsp",
+				"dockerfile-language-server",
+				"yaml-language-server",
 				"marksman",
 				"html-lsp",
 				"css-lsp",

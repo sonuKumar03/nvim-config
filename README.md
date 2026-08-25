@@ -1,6 +1,6 @@
 # Neovim Config
 
-Neovim setup for fullstack work, Python practice, and Nx monorepos.
+Neovim setup for fullstack work and Nx monorepos.
 
 ## Install
 
@@ -24,7 +24,6 @@ nvim
 - `rg`
 - `fd`
 - `node`
-- `python3`
 - `go`
 
 ## Cheatsheets
@@ -119,13 +118,8 @@ Need help remembering keys? Check out these detailed references:
 - `<leader>oO` toggles Overseer
 - `<leader>or` runs an Overseer task
 
-### LeetCode
-
-- `:LeetCodeScratch` opens a Python scratch buffer
-- `:LeetCodeRun` runs the current Python file
-
 ## Notes
 
 - `lazy-lock.json` pins plugin versions.
 - `nvim.log` is ignored.
-- This config is tuned for JS/TS, Python, Go, and Nx work.
+- This config is tuned for JS/TS, Go, Java, and Nx work.

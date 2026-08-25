@@ -15,9 +15,10 @@ return {
 				"typescript",
 				"javascript",
 				"java",
-				"python",
 				"go",
 				"json",
+				"yaml",
+				"dockerfile",
 				"html",
 				"css",
 			}

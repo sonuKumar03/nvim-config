@@ -6,7 +6,7 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "angularls@20.3.0", "lua_ls", "pyright", "gopls", "jdtls", "vtsls" },
+			ensure_installed = { "angularls@20.3.0", "lua_ls", "gopls", "jdtls", "vtsls" },
 			automatic_enable = {
 				exclude = { "jdtls", "ts_ls" },
 			},

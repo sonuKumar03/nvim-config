@@ -66,7 +66,7 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 ## 4. Language Server (LSP) & Navigation
 These keymaps are registered automatically on buffers where a Language Server is attached.
 
-Java files use `jdtls` for completion, diagnostics, imports, navigation, and manual LSP formatting. Java format-on-save is disabled to keep LeetCode scratch files lightweight. For single-file LeetCode practice, the Java LSP falls back to the current file directory when no Maven or Gradle project root exists.
+Java files use `jdtls` for completion, diagnostics, imports, navigation, and manual LSP formatting.
 
 ### Code Actions & Details
 | Keymap | Action | Description |
@@ -166,19 +166,6 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
     *   `<leader>co` - Choose **o**ur change.
     *   `<leader>cb` - Choose **b**oth changes.
     *   `<leader>cn` - Choose **n**one.
-
-## Python LeetCode Helpers
-| Command | Action | Description |
-| :--- | :--- | :--- |
-| `:LCP [name]` / `:LeetCodePythonScratch [name]` | Python Scratch | Open a named Python LeetCode file with a `Solution` class and `__main__` harness. |
-| `:LCPR` / `:LeetCodePythonRun` | Run Python File | Run the current saved Python file with `python3` from its directory. |
-| `:LeetCodeScratch [name]` / `:LeetCodeRun` | Legacy Aliases | Backward-compatible aliases for the Python scratch and run commands. |
-
-## Java LeetCode Helpers
-| Command | Action | Description |
-| :--- | :--- | :--- |
-| `:LeetCodeJavaScratch [name]` | Java Scratch | Open a Java-safe file name with a matching public outer class and an empty nested `Solution` class. |
-| `:LeetCodeJavaRun` | Run Java File | Compile the current Java file with `javac` and run the detected class from a temp build directory. |
 
 ---
 
