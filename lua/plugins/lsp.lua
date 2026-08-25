@@ -44,6 +44,7 @@ return {
 						},
 					},
 				},
+				pyright = {},
 				gopls = {
 					settings = {
 						gopls = {

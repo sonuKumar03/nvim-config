@@ -83,6 +83,55 @@ return {
 		end,
 	},
 
+	{
+		"leetcode-python",
+		dir = vim.fn.stdpath("config"),
+		init = function()
+			local function scratch(opts)
+				local name = vim.trim(opts.args)
+				if name == "" then
+					name = "main.py"
+				elseif not name:match("%.py$") then
+					name = name .. ".py"
+				end
+
+				vim.cmd.edit(vim.fn.fnameescape(name))
+				if vim.api.nvim_buf_line_count(0) == 1 and vim.api.nvim_get_current_line() == "" then
+					vim.api.nvim_buf_set_lines(0, 0, -1, false, {
+						"from typing import *",
+						"",
+						"class Solution:",
+						"    def solve(self):",
+						"        pass",
+						"",
+						'if __name__ == "__main__":',
+						"    solution = Solution()",
+					})
+				end
+			end
+
+			local function run()
+				local path = vim.api.nvim_buf_get_name(0)
+				if path == "" then
+					vim.notify("Save the file before running", vim.log.levels.WARN)
+					return
+				end
+
+				vim.cmd.write()
+				vim.cmd.botright("split")
+				vim.fn.termopen({ "python3", path }, { cwd = vim.fn.fnamemodify(path, ":h") })
+				vim.cmd.startinsert()
+			end
+
+			vim.api.nvim_create_user_command("LeetCodePythonScratch", scratch, { nargs = "?", complete = "file" })
+			vim.api.nvim_create_user_command("LeetCodePythonRun", run, {})
+			vim.api.nvim_create_user_command("LeetCodeScratch", scratch, { nargs = "?", complete = "file" })
+			vim.api.nvim_create_user_command("LeetCodeRun", run, {})
+			vim.api.nvim_create_user_command("LCP", scratch, { nargs = "?", complete = "file" })
+			vim.api.nvim_create_user_command("LCPR", run, {})
+		end,
+	},
+
 	-- Persistence: Session restoration manager
 	{
 		"folke/persistence.nvim",
