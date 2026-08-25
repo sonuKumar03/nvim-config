@@ -1,14 +1,16 @@
 return {
 	{
 		"mason-org/mason.nvim",
-		opts = {},
+		opts = {
+			PATH = "prepend",
+		},
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "angularls@20.3.0", "lua_ls", "pyright", "gopls", "jdtls", "vtsls" },
+			ensure_installed = { "angularls@20.3.0", "lua_ls", "pyright", "ruff", "gopls", "vtsls" },
 			automatic_enable = {
-				exclude = { "jdtls", "ts_ls" },
+				exclude = { "ts_ls" },
 			},
 		},
 		dependencies = {

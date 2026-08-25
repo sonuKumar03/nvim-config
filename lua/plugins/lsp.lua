@@ -4,6 +4,7 @@ return {
 		dependencies = {
 			"saghen/blink.cmp",
 			"mason-org/mason.nvim",
+			"b0o/schemastore.nvim",
 		},
 		config = function()
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
@@ -44,7 +45,35 @@ return {
 						},
 					},
 				},
-				pyright = {},
+				pyright = {
+					settings = {
+						pyright = {
+							disableOrganizeImports = true, -- Handled by ruff
+						},
+						python = {
+							analysis = {
+								autoSearchPaths = true,
+								useLibraryCodeForTypes = true,
+								diagnosticMode = "openFilesOnly",
+							},
+						},
+					},
+				},
+				ruff = {
+					root_dir = function(bufnr, on_dir)
+						local fname = vim.api.nvim_buf_get_name(bufnr)
+						local marker = vim.fs.find(
+							{ "pyproject.toml", "ruff.toml", ".ruff.toml", "requirements.txt", "setup.py", ".git" },
+							{ path = fname, upward = true }
+						)[1]
+						local root = (marker and vim.fs.dirname(marker))
+							or (fname ~= "" and vim.fs.dirname(fname))
+							or vim.fn.getcwd()
+						if root then
+							on_dir(root)
+						end
+					end,
+				},
 				gopls = {
 					settings = {
 						gopls = {
@@ -179,7 +208,6 @@ return {
 						},
 					},
 				},
-				texlab = {},
 				angularls = {
 					filetypes = { "typescript", "html", "typescriptreact", "htmlangular" },
 					root_dir = function(bufnr, on_dir)
@@ -214,9 +242,34 @@ return {
 						return vim.lsp.rpc.start(cmd, dispatchers)
 					end,
 				},
-				jsonls = {},
+				jsonls = {
+					on_new_config = function(new_config)
+						new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+						vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+					end,
+					settings = {
+						json = {
+							schemas = require("schemastore").json.schemas(),
+							validate = { enable = true },
+						},
+					},
+				},
 				dockerls = {},
-				yamlls = {},
+				yamlls = {
+					on_new_config = function(new_config)
+						new_config.settings.yaml.schemas = new_config.settings.yaml.schemas or {}
+						vim.list_extend(new_config.settings.yaml.schemas, require("schemastore").yaml.schemas())
+					end,
+					settings = {
+						yaml = {
+							schemaStore = {
+								enable = false,
+								url = "",
+							},
+							schemas = require("schemastore").yaml.schemas(),
+						},
+					},
+				},
 				marksman = {},
 				html = {
 					-- Prevent collision: If in an Angular project, angularls handles HTML templates

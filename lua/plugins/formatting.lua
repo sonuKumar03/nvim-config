@@ -60,10 +60,10 @@ return {
 					lua = { "stylua" },
 					javascript = prettier_or_fallback,
 					javascriptreact = prettier_or_fallback,
-					java = {},
 					typescript = prettier_or_fallback,
 					typescriptreact = prettier_or_fallback,
 					go = { "goimports", "gofumpt" },
+					python = { "ruff_organize_imports", "ruff_format" },
 					json = prettier_or_fallback,
 					yaml = prettier_or_fallback,
 					markdown = prettier_or_fallback,
@@ -75,10 +75,6 @@ return {
 					lsp_format = "fallback",
 				},
 				format_on_save = function(bufnr)
-					if vim.bo[bufnr].filetype == "java" then
-						-- Keep Java save lightweight; use manual LSP formatting when needed.
-						return nil
-					end
 					return {
 						timeout_ms = 500,
 						lsp_format = "fallback",
@@ -136,7 +132,7 @@ return {
 				"goimports",
 				"gofumpt",
 				"golangci-lint",
-				"texlab",
+				"ruff",
 				"json-lsp",
 				"dockerfile-language-server",
 				"yaml-language-server",
