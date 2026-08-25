@@ -9,14 +9,14 @@ return {
 				{ "<leader>b", group = "Buffers" },
 				{ "<leader>f", group = "Find" },
 				{ "<leader>g", group = "Git" },
-				{ "<leader>h", group = "Harpoon" },
 				{ "<leader>n", group = "Notes / Obsidian" },
-				{ "<leader>o", group = "Tasks" },
+				{ "<leader>o", group = "Terminal" },
 				{ "<leader>p", group = "Projects" },
 				{ "<leader>q", group = "Session / Quit" },
 				{ "<leader>s", group = "Search / Replace" },
 				{ "<leader>u", group = "Toggles / Options" },
 				{ "<leader>x", group = "Diagnostics" },
+				{ "<leader>P", desc = "Command Palette (VS Code)" },
 			},
 		},
 		keys = {
@@ -28,108 +28,6 @@ return {
 				desc = "Keymaps (which-key)",
 			},
 		},
-	},
-
-	-- Overseer: Extensible task runner and build system manager
-	{
-		"stevearc/overseer.nvim",
-		cmd = {
-			"OverseerOpen",
-			"OverseerClose",
-			"OverseerToggle",
-			"OverseerRun",
-			"OverseerTaskAction",
-		},
-		opts = {
-			task_list = {
-				keymaps = {
-					["<C-j>"] = false,
-					["<C-k>"] = false,
-				},
-			},
-		},
-	},
-
-	-- ToggleTerm: Persistent floating/split terminals for project shells and REPLs
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		cmd = {
-			"ToggleTerm",
-			"ToggleTermToggleAll",
-			"TermExec",
-			"TermNew",
-			"TermSelect",
-		},
-		keys = {
-			{ [[<C-\>]], "<cmd>ToggleTerm<cr>", mode = { "n", "t" }, desc = "Terminal: Toggle" },
-			{ "<leader>ot", "<cmd>ToggleTerm<cr>", desc = "Terminal: Toggle" },
-		},
-		opts = {
-			open_mapping = [[<C-\>]],
-			direction = "float",
-			float_opts = {
-				border = "curved",
-			},
-		},
-	},
-
-	-- VimTeX: Rich integration for LaTeX documents compiling
-	{
-		"lervag/vimtex",
-		lazy = false, -- VimTeX manages its own load sequences dynamically
-		init = function()
-			vim.g.vimtex_view_method = "skim" -- Viewer configuration (Skim on macOS)
-		end,
-	},
-
-	{
-		"leetcode-python",
-		dir = vim.fn.stdpath("config"),
-		init = function()
-			local function scratch(opts)
-				local name = vim.trim(opts.args)
-				if name == "" then
-					name = "main.py"
-				elseif not name:match("%.py$") then
-					name = name .. ".py"
-				end
-
-				vim.cmd.edit(vim.fn.fnameescape(name))
-				if vim.api.nvim_buf_line_count(0) == 1 and vim.api.nvim_get_current_line() == "" then
-					vim.api.nvim_buf_set_lines(0, 0, -1, false, {
-						"from typing import *",
-						"",
-						"class Solution:",
-						"    def solve(self):",
-						"        pass",
-						"",
-						'if __name__ == "__main__":',
-						"    solution = Solution()",
-					})
-				end
-			end
-
-			local function run()
-				local path = vim.api.nvim_buf_get_name(0)
-				if path == "" then
-					vim.notify("Save the file before running", vim.log.levels.WARN)
-					return
-				end
-
-				vim.cmd.write()
-				vim.cmd.botright("split")
-				vim.fn.termopen({ "python3", path }, { cwd = vim.fn.fnamemodify(path, ":h") })
-				vim.cmd.startinsert()
-			end
-
-			vim.api.nvim_create_user_command("LeetCodePythonScratch", scratch, { nargs = "?", complete = "file" })
-			vim.api.nvim_create_user_command("LeetCodePythonRun", run, {})
-			vim.api.nvim_create_user_command("LeetCodeScratch", scratch, { nargs = "?", complete = "file" })
-			vim.api.nvim_create_user_command("LeetCodeRun", run, {})
-			vim.api.nvim_create_user_command("LCP", scratch, { nargs = "?", complete = "file" })
-			vim.api.nvim_create_user_command("LCPR", run, {})
-		end,
 	},
 
 	-- Persistence: Session restoration manager
@@ -146,9 +44,24 @@ return {
 		},
 	},
 
-	-- Sleuth: Automatically detect tabstop and shiftwidth from files
+	-- Legendary: VS Code-style Command Palette with keybinding hints & Telescope UI
 	{
-		"tpope/vim-sleuth",
-		lazy = false, -- Needs to load early to inspect file indents when buffers open
+		"mrjones2014/legendary.nvim",
+		priority = 10000,
+		lazy = false,
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		opts = {
+			include_builtin = true,
+			include_legendary_cmds = true,
+			extensions = {
+				lazy_nvim = true,
+				which_key = { auto_register = true },
+			},
+		},
+		keys = {
+			{ "<leader>P", "<cmd>Legendary<cr>", desc = "Command Palette (VS Code)" },
+			{ "<C-p>", "<cmd>Legendary<cr>", desc = "Command Palette (VS Code)" },
+			{ "<leader><space>", "<cmd>Legendary<cr>", desc = "Command Palette (VS Code)" },
+		},
 	},
 }

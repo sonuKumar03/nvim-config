@@ -12,9 +12,6 @@ vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "Buffers: New" })
 vim.keymap.set("n", "<leader>bh", "<cmd>bprevious<cr>", { desc = "Buffers: Previous" })
 vim.keymap.set("n", "<leader>bl", "<cmd>bnext<cr>", { desc = "Buffers: Next" })
 vim.keymap.set("n", "<leader>bc", function() Snacks.bufdelete() end, { desc = "Buffers: Close" })
-vim.keymap.set("n", "<leader>oo", "<cmd>OverseerOpen<cr>", { desc = "Tasks: Open" })
-vim.keymap.set("n", "<leader>oO", "<cmd>OverseerToggle<cr>", { desc = "Tasks: Toggle" })
-vim.keymap.set("n", "<leader>or", "<cmd>OverseerRun<cr>", { desc = "Tasks: Run" })
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble: Workspace Diagnostics" })
 vim.keymap.set("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Trouble: Buffer Diagnostics" })
 vim.keymap.set("n", "<leader>xe", "<cmd>Trouble diagnostics toggle filter.severity=vim.diagnostic.severity.ERROR<cr>", { desc = "Trouble: Workspace Errors" })
@@ -65,3 +62,6 @@ end, { desc = "Format buffer" })
 -- Cheatsheet split window shortcuts
 vim.keymap.set("n", "<leader>cm", "<cmd>vsplit ~/.config/nvim/cheatsheet_motion.md<cr>", { desc = "Cheatsheet: Vim Motions" })
 vim.keymap.set("n", "<leader>cp", "<cmd>vsplit ~/.config/nvim/cheatsheet_plugins.md<cr>", { desc = "Cheatsheet: Plugins" })
+
+
+
