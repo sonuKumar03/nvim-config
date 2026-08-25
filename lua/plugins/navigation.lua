@@ -122,86 +122,6 @@ return {
 		},
 	},
 
-	-- Harpoon: Quick file pinning and jumping
-	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			local harpoon = require("harpoon")
-			harpoon:setup({})
-		end,
-		keys = {
-			{
-				"<leader>ha",
-				function()
-					require("harpoon"):list():add()
-				end,
-				desc = "Harpoon: Add File",
-			},
-			{
-				"<leader>hh",
-				function()
-					local harpoon = require("harpoon")
-					harpoon.ui:toggle_quick_menu(harpoon:list())
-				end,
-				desc = "Harpoon: List Menu",
-			},
-			{
-				"<leader>h1",
-				function()
-					require("harpoon"):list():select(1)
-				end,
-				desc = "Harpoon: Go to File 1",
-			},
-			{
-				"<leader>h2",
-				function()
-					require("harpoon"):list():select(2)
-				end,
-				desc = "Harpoon: Go to File 2",
-			},
-			{
-				"<leader>h3",
-				function()
-					require("harpoon"):list():select(3)
-				end,
-				desc = "Harpoon: Go to File 3",
-			},
-			{
-				"<leader>h4",
-				function()
-					require("harpoon"):list():select(4)
-				end,
-				desc = "Harpoon: Go to File 4",
-			},
-		},
-	},
-
-	-- Aerial: Code outline navigation sidebar
-	{
-		"stevearc/aerial.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
-		opts = {
-			on_attach = function(bufnr)
-				vim.keymap.set("n", "{", "<cmd>AerialPrev<cr>", { buffer = bufnr, desc = "Aerial: Jump Prev" })
-				vim.keymap.set("n", "}", "<cmd>AerialNext<cr>", { buffer = bufnr, desc = "Aerial: Jump Next" })
-			end,
-			nerd_font = "auto",
-			layout = {
-				width = 55,
-				min_width = 40,
-				max_width = { 45, 0.35 },
-			},
-		},
-		keys = {
-			{ "<leader>co", "<cmd>AerialToggle! right<cr>", desc = "Code: Toggle Outline (Aerial)" },
-		},
-	},
-
 	-- Vim-Tmux-Navigator: Seamless navigation between Vim and Tmux splits
 	{
 		"christoomey/vim-tmux-navigator",
@@ -218,5 +138,25 @@ return {
 			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>", desc = "Pane: Navigate Up" },
 			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>", desc = "Pane: Navigate Right" },
 		},
+	},
+
+	-- Illuminate: Automatically highlight other uses of the word under cursor
+	{
+		"RRethy/vim-illuminate",
+		event = { "BufReadPost", "BufNewFile" },
+		opts = {
+			delay = 200,
+			large_file_cutoff = 2000,
+			under_cursor = true,
+		},
+		config = function(_, opts)
+			require("illuminate").configure(opts)
+			vim.keymap.set("n", "]r", function()
+				require("illuminate").goto_next_reference(true)
+			end, { desc = "Illuminate: Next Reference" })
+			vim.keymap.set("n", "[r", function()
+				require("illuminate").goto_prev_reference(true)
+			end, { desc = "Illuminate: Prev Reference" })
+		end,
 	},
 }
