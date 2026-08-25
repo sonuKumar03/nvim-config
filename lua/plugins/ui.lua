@@ -50,13 +50,6 @@ return {
 		},
 	},
 
-	-- Fidget: Visual progress bar spinner for LSP status updates (indexing, diagnosing, etc.)
-	{
-		"j-hui/fidget.nvim",
-		event = "LspAttach",
-		opts = {},
-	},
-
 	-- Trouble: Expandable sidebar/bottom panel for project errors and workspace diagnostics
 	{
 		"folke/trouble.nvim",
@@ -130,20 +123,6 @@ return {
 		opts = {},
 	},
 
-	-- Markdown Preview: Live browser preview for markdown documentation
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = "cd app && npm install",
-		init = function()
-			vim.g.mkdp_filetypes = { "markdown" }
-		end,
-		keys = {
-			{ "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown: Live Preview" },
-		},
-	},
-
 	-- Bufferline: Tabs-like header bar for open buffers
 	{
 		"akinsho/bufferline.nvim",
@@ -173,5 +152,26 @@ return {
 		"smjonas/inc-rename.nvim",
 		cmd = "IncRename",
 		opts = {},
+	},
+
+	-- Wilder: Floating, auto-completing command-line palette with devicons
+	{
+		"gelguy/wilder.nvim",
+		event = "CmdlineEnter",
+		keys = { ":", "/", "?" },
+		config = function()
+			local wilder = require("wilder")
+			wilder.setup({ modes = { ":", "/", "?" } })
+			wilder.set_option(
+				"renderer",
+				wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+					highlighter = wilder.basic_highlighter(),
+					left = { " ", wilder.popupmenu_devicons() },
+					right = { " ", wilder.popupmenu_scrollbar() },
+					border = "rounded",
+					max_height = "40%",
+				}))
+			)
+		end,
 	},
 }

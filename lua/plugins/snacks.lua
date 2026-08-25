@@ -22,7 +22,7 @@ return {
     dim = { enabled = true },
     input = { enabled = true },
     notifier = { enabled = false },
-    profiler = { enabled = true },
+    profiler = { enabled = false },
     scroll = { enabled = true },
     select = { enabled = true },
     statuscolumn = { enabled = true },
@@ -34,13 +34,15 @@ return {
     picker = { enabled = false },
     quickfile = { enabled = false },
     scratch = { enabled = false },
-    terminal = { enabled = false },
+    terminal = { enabled = true },
     toggle = { enabled = true },
     words = { enabled = true },
     zen = { enabled = false },
   },
   keys = {
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer (Snacks)" },
+    { [[<C-\>]], function() Snacks.terminal() end, mode = { "n", "t" }, desc = "Terminal: Toggle" },
+    { "<leader>ot", function() Snacks.terminal() end, desc = "Terminal: Toggle" },
     {
       "<leader>gg",
       function()

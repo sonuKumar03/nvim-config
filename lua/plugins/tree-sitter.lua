@@ -14,7 +14,6 @@ return {
 				"markdown_inline",
 				"typescript",
 				"javascript",
-				"java",
 				"go",
 				"json",
 				"yaml",

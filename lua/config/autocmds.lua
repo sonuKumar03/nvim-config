@@ -6,20 +6,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-	group = vim.api.nvim_create_augroup("latex-keymaps", { clear = true }),
-	pattern = { "tex", "plaintex" },
-	callback = function(event)
-		local map = function(keys, cmd, desc)
-			vim.keymap.set("n", keys, cmd, { buffer = event.buf, desc = "LaTeX: " .. desc })
-		end
-
-		map("<leader>ltc", "<cmd>VimtexCompile<cr>", "Compile")
-		map("<leader>ltv", "<cmd>VimtexView<cr>", "View PDF")
-		map("<leader>ltl", "<cmd>VimtexClean<cr>", "Clean Aux Files")
-	end,
-})
-
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
 	group = vim.api.nvim_create_augroup("auto-reload-changed-files", { clear = true }),
 	callback = function()
@@ -35,4 +21,3 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
 		vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.INFO)
 	end,
 })
-
