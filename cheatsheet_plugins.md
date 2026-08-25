@@ -49,7 +49,25 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 
 ---
 
-## 3. Buffer Management (Bufferline)
+## 3. Command Palette (legendary.nvim)
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `<space><space>` | Command Palette | Open VS Code-style Command Palette with shortcut hints |
+| `<leader>P` | Command Palette | Open VS Code-style Command Palette |
+| `<C-p>` | Command Palette | Open VS Code-style Command Palette |
+
+---
+
+## 4. Symbol Navigation (vim-illuminate)
+*   **Automatic Highlighting**: Cursor automatically highlights all occurrences of the word/symbol under cursor.
+| Keymap | Action | Description |
+| :--- | :--- | :--- |
+| `]r` | Next Symbol Reference | Jump to next occurrence of symbol under cursor |
+| `[r` | Prev Symbol Reference | Jump to previous occurrence of symbol under cursor |
+
+---
+
+## 5. Buffer Management (Bufferline)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `<Tab>` / `]b` | Next Buffer | Jump to the next open buffer in the tabline. |
@@ -65,8 +83,6 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 
 ## 4. Language Server (LSP) & Navigation
 These keymaps are registered automatically on buffers where a Language Server is attached.
-
-Java files use `jdtls` for completion, diagnostics, imports, navigation, and manual LSP formatting.
 
 ### Code Actions & Details
 | Keymap | Action | Description |
@@ -167,31 +183,24 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
     *   `<leader>cb` - Choose **b**oth changes.
     *   `<leader>cn` - Choose **n**one.
 
-## Python LeetCode Helpers
+## 8. Python LeetCode Helpers
 
 | Command | Action | Description |
 | :--- | :--- | :--- |
-| `:LCP [name]` / `:LeetCodePythonScratch [name]` | Python Scratch | Open a Python file with a `Solution` class and `__main__` harness. |
-| `:LCPR` / `:LeetCodePythonRun` | Run Python File | Save and run the current Python file from its directory. |
-| `:LeetCodeScratch [name]` / `:LeetCodeRun` | Aliases | Short aliases for the Python commands. |
+| `:LCP [name]` | Python Scratch | Open a Python file with a `Solution` class and `__main__` harness. |
+| `:LCPR` | Run Python File | Save and run the current Python file from its directory. |
 
 ---
 
-## 9. Tasks
+## 9. Terminal
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
-| `<leader>oo` | Overseer Open | Open task list panel (compilation/runner tasks). |
-| `<leader>oO` | Overseer Toggle | Toggle the task panel visibility. |
-| `<leader>or` | Overseer Run | Open task runner template menu to choose a template. |
-|  | Go: test all (race) | Run `go test -race ./...` from the module root. |
-|  | Go: test all (coverage) | Run the suite and write `coverage.out`. |
-|  | Go: vet all | Run `go vet ./...` from the module root. |
-| `<leader>ot` | Toggle Terminal | Open/close the floating ToggleTerm terminal. |
+| `<leader>ot` | Toggle Terminal | Open/close the Snacks terminal. |
 | `<C-\>` | Toggle Terminal | Fast terminal toggle from Normal or Terminal mode. |
 
 ---
 
-## 11. Session Management (Persistence)
+## 10. Session Management (Persistence)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `<leader>qs` | Restore Session (CWD) | Restores the saved workspace layout and files for current directory. |
@@ -200,16 +209,7 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
 
 ---
 
-## 12. File Pinning (Harpoon)
-| Keymap | Action | Description |
-| :--- | :--- | :--- |
-| `<leader>ha` | Add File | Pins the current active file buffer to the Harpoon selection list. |
-| `<leader>hh` | Toggle Menu | Opens the interactive floating list window of pinned files. |
-| `<leader>h1` - `4` | Go to File 1 - 4 | Instantly jumps to the corresponding pinned file in the list. |
-
----
-
-## 13. Toggles & Options (Snacks Toggles)
+## 11. Toggles & Options (Snacks Toggles)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `<leader>ud` | Toggle Diagnostics | Dynamically show/hide inline code linting and error warnings. |
@@ -218,7 +218,7 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
 
 ---
 
-## 14. Notes / Obsidian Note-Taking
+## 12. Notes / Obsidian Note-Taking
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `<leader>nn` | New Note | Create a new Obsidian note file. |
@@ -236,9 +236,10 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
 
 ---
 
-## 15. Minor Workflow Helpers & Previews
+## 13. Minor Workflow Helpers & Previews
+*   **Wilder (Floating Cmdline)**: Pressing `:`, `/`, or `?` triggers a floating fuzzy-completion command palette with devicons and scrollbar.
+*   **SchemaStore**: Injects JSON & YAML schema autocompletion and validation for `package.json`, `tsconfig.json`, GitHub Actions, Kubernetes, etc.
 *   **Dropbar**: Press **`<leader>;`** to pick symbols from the winbar. Use **`[;`** to jump to the current context start and **`];`** to select the next context.
-*   **Markdown Preview**: Press **`<leader>mp`** to toggle real-time documentation browser rendering in your browser.
 *   **Blink.cmp**: Autocomplete triggers automatically as you type. Use `Tab` / `Shift+Tab` or `Up` / `Down` to navigate, `Enter` or `Space` to accept.
 *   **Smear Cursor**: Adds a subtle animated cursor trail in terminal Neovim.
 *   **Todo Comments**: Annotations like `TODO:`, `FIXME:`, `NOTE:`, `WARNING:` in code comments are syntax-highlighted in custom colors.
@@ -248,7 +249,7 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
 
 ---
 
-## 16. Smart Commenting (Comment.nvim)
+## 14. Smart Commenting (Comment.nvim)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `gcc` | Toggle Line Comment | Comment/uncomment the current line. |
@@ -257,10 +258,3 @@ Java files use `jdtls` for completion, diagnostics, imports, navigation, and man
 | `gb` | Block Comment Selection | Block comment/uncomment selection (Visual Mode). |
 
 ---
-
-## 17. Code Outline Sidebar (Aerial.nvim)
-| Keymap | Action | Description |
-| :--- | :--- | :--- |
-| `<leader>co` | Toggle Outline | Open/close the Aerial code structure/outline panel on the right. |
-| `{` | Jump Previous Symbol | Navigate to the previous symbol definition (when inside file with Aerial active). |
-| `}` | Jump Next Symbol | Navigate to the next symbol definition (when inside file with Aerial active). |

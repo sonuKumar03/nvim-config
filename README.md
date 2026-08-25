@@ -38,15 +38,15 @@ Need help remembering keys? Check out these detailed references:
 
 ### Start Here
 
+- `<space><space>` or `<leader>P` or `<C-p>` opens the VS Code Command Palette (`legendary.nvim`)
 - `<leader>?` shows keymaps with which-key
-- `<leader>ff` finds files
-- `<leader>fg` searches text across the project
+- `<leader>ff` finds files (Telescope)
+- `<leader>fg` searches text across the project (Live Grep)
 - `<leader>e` opens Neo-tree at the project root
-- `<leader>E` opens Neo-tree at the current directory
-- `<leader>co` toggles the dedicated code outline sidebar (Aerial)
 
-### Editing & Commenting
+### Editing & Navigation
 
+- `]r` and `[r` jump to next/previous occurrence of the symbol under cursor (`vim-illuminate`)
 - `gcc` comments or uncomments the current line
 - `gbc` block comments the current line
 - `gc` (in Visual mode) comments or uncomments the selection
@@ -54,11 +54,12 @@ Need help remembering keys? Check out these detailed references:
 
 ### Files and Buffers
 
+- `<Tab>` and `<S-Tab>` jump to next/previous open buffer
+- `<leader>bp` interactively picks a buffer by overlay label
 - `<leader>bn` creates a new buffer
 - `<leader>bh` and `<leader>bl` move to previous/next buffers
 - `<leader>bc` closes the current buffer
 - `<leader>be` opens the Neo-tree buffers view
-- native tabpage keymaps are not part of this config
 
 ### Git
 
@@ -68,7 +69,7 @@ Need help remembering keys? Check out these detailed references:
 - `<leader>gF` opens file history
 - `<leader>gH` opens current-file history
 - `<leader>gb` toggles inline current-line Git blame
-- `gitsigns` handles hunk staging, reset, preview, blame, and navigation
+- `gitsigns` handles hunk staging, reset, preview, blame, and navigation (`]h` / `[h`)
 
 ### Search and Replace
 
@@ -89,43 +90,14 @@ Need help remembering keys? Check out these detailed references:
 - `<leader>xr` opens references
 - `<leader>xd` opens definitions
 
-### Debug
-
-- `<leader>db` toggles a breakpoint
-- `<leader>dB` sets a conditional breakpoint
-- `<leader>dc` continues
-- `<leader>di` steps into
-- `<leader>do` steps over
-- `<leader>dO` steps out
-- `<leader>dr` opens the REPL
-- `<leader>du` toggles the DAP UI
-- `<leader>dt` terminates
-- `<leader>dl` reruns the last session
-
-### Tests
-
-- `<leader>tr` runs the nearest test
-- `<leader>tf` runs the current file
-- `<leader>ts` runs the suite
-- `<leader>td` debugs the nearest test
-- `<leader>tt` stops a running test
-- `<leader>to` opens test output
-- `<leader>tO` toggles the output panel
-- `<leader>tS` toggles the summary panel
-
-### Tasks
-
-- `<leader>oo` opens Overseer
-- `<leader>oO` toggles Overseer
-- `<leader>or` runs an Overseer task
-
 ### LeetCode
 
-- `:LeetCodeScratch` opens a Python scratch file
-- `:LeetCodeRun` runs the current Python file
+- `:LCP [name]` opens a Python scratch file
+- `:LCPR` runs the current Python file
 
 ## Notes
 
 - `lazy-lock.json` pins plugin versions.
 - `nvim.log` is ignored.
-- This config is tuned for JS/TS, Python, Go, Java, and Nx work.
+- This config is tuned for JS/TS, Python, Go, and Nx work.
+- Includes `wilder.nvim` (floating command palette) and `schemastore.nvim` (JSON/YAML schema validation).
