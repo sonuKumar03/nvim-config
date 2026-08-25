@@ -50,6 +50,13 @@ return {
 		},
 	},
 
+	-- Fidget: Visual progress bar spinner for LSP status updates (indexing, diagnosing, etc.)
+	{
+		"j-hui/fidget.nvim",
+		event = "LspAttach",
+		opts = {},
+	},
+
 	-- Trouble: Expandable sidebar/bottom panel for project errors and workspace diagnostics
 	{
 		"folke/trouble.nvim",
