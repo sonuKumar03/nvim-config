@@ -47,8 +47,6 @@ return {
 	-- Legendary: VS Code-style Command Palette with keybinding hints & Telescope UI
 	{
 		"mrjones2014/legendary.nvim",
-		priority = 10000,
-		lazy = false,
 		dependencies = { "nvim-telescope/telescope.nvim" },
 		opts = {
 			include_builtin = true,
