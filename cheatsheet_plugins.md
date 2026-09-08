@@ -237,7 +237,6 @@ These keymaps are registered automatically on buffers where a Language Server is
 ---
 
 ## 13. Minor Workflow Helpers & Previews
-*   **Wilder (Floating Cmdline)**: Pressing `:`, `/`, or `?` triggers a floating fuzzy-completion command palette with devicons and scrollbar.
 *   **SchemaStore**: Injects JSON & YAML schema autocompletion and validation for `package.json`, `tsconfig.json`, GitHub Actions, Kubernetes, etc.
 *   **Dropbar**: Press **`<leader>;`** to pick symbols from the winbar. Use **`[;`** to jump to the current context start and **`];`** to select the next context.
 *   **Blink.cmp**: Autocomplete triggers automatically as you type. Use `Tab` / `Shift+Tab` or `Up` / `Down` to navigate, `Enter` or `Space` to accept.

@@ -100,4 +100,4 @@ Need help remembering keys? Check out these detailed references:
 - `lazy-lock.json` pins plugin versions.
 - `nvim.log` is ignored.
 - This config is tuned for JS/TS, Python, Go, and Nx work.
-- Includes `wilder.nvim` (floating command palette) and `schemastore.nvim` (JSON/YAML schema validation).
+- Includes `schemastore.nvim` for JSON/YAML schema validation.
