@@ -240,7 +240,6 @@ These keymaps are registered automatically on buffers where a Language Server is
 *   **SchemaStore**: Injects JSON & YAML schema autocompletion and validation for `package.json`, `tsconfig.json`, GitHub Actions, Kubernetes, etc.
 *   **Dropbar**: Press **`<leader>;`** to pick symbols from the winbar. Use **`[;`** to jump to the current context start and **`];`** to select the next context.
 *   **Blink.cmp**: Autocomplete triggers automatically as you type. Use `Tab` / `Shift+Tab` or `Up` / `Down` to navigate, `Enter` or `Space` to accept.
-*   **Smear Cursor**: Adds a subtle animated cursor trail in terminal Neovim.
 *   **Todo Comments**: Annotations like `TODO:`, `FIXME:`, `NOTE:`, `WARNING:` in code comments are syntax-highlighted in custom colors.
 *   **HTML Auto-tag**: In `.html`, `.tsx`, `.vue` files, changing an opening tag automatically updates its closing tag counterpart.
 *   **Colorizer**: CSS hexadecimal colors (like `#ff0055`) show their true color block inline.

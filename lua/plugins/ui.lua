@@ -25,12 +25,6 @@ return {
 		end,
 	},
 
-	-- Smear Cursor: Animated cursor trail for terminal Neovim
-	{
-		"sphamba/smear-cursor.nvim",
-		opts = {},
-	},
-
 	-- Lualine Statusline: Customizable active status bar at the bottom
 	{
 		"nvim-lualine/lualine.nvim",
