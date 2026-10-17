@@ -10,7 +10,9 @@ return {
 		opts = {
 			ensure_installed = { "angularls@20.3.0", "lua_ls", "pyright", "ruff", "gopls", "vtsls" },
 			automatic_enable = {
-				exclude = { "ts_ls" },
+				-- ts_ls: vtsls is used instead; stylua: formatting goes through conform;
+				-- jdtls/texlab: installed but not configured here
+				exclude = { "ts_ls", "stylua", "jdtls", "texlab" },
 			},
 		},
 		dependencies = {

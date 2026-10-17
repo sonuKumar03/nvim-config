@@ -70,8 +70,8 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 ## 5. Buffer Management (Bufferline)
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
-| `<Tab>` / `]b` | Next Buffer | Jump to the next open buffer in the tabline. |
-| `<S-Tab>` / `[b` | Previous Buffer | Jump to the previous open buffer in the tabline. |
+| `]b` | Next Buffer | Jump to the next open buffer in the tabline. |
+| `[b` | Previous Buffer | Jump to the previous open buffer in the tabline. |
 | `<leader>bp` | Pick Buffer | Pick a buffer directly by typing its visible overlay letter. |
 | `<leader>bd` | Delete Buffer | Delete the current active buffer safely without closing window splits. |
 | `<leader>bn` | New Buffer | Create a new blank file buffer. |

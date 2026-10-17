@@ -54,7 +54,7 @@ Need help remembering keys? Check out these detailed references:
 
 ### Files and Buffers
 
-- `<Tab>` and `<S-Tab>` jump to next/previous open buffer
+- `]b` and `[b` jump to next/previous open buffer
 - `<leader>bp` interactively picks a buffer by overlay label
 - `<leader>bn` creates a new buffer
 - `<leader>bh` and `<leader>bl` move to previous/next buffers

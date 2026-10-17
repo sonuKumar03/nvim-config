@@ -36,47 +36,42 @@ return {
 				return false
 			end
 
+			local global_config = vim.fn.stdpath("config") .. "/prettier.config.js"
+			local has_global_config = vim.uv.fs_stat(global_config) ~= nil
+
+			-- prettier: pass the global config only when the project has none
 			local function get_prettier_args(self, ctx)
-				if not has_prettier_config(ctx) then
-					local global_config = vim.fn.stdpath("config") .. "/prettier.config.js"
-					if vim.uv.fs_stat(global_config) then
-						return { "--config", global_config }
-					end
+				if has_global_config and not has_prettier_config(ctx) then
+					return { "--config", global_config }
 				end
 				return {}
 			end
 
-			local function prettier_or_fallback(bufnr)
-				local fname = vim.api.nvim_buf_get_name(bufnr)
-				if has_prettier_config({ filename = fname }) then
-					return { "prettierd", "prettier", stop_after_first = true }
-				else
-					return { "prettier" }
-				end
-			end
+			-- prettierd (daemon, faster) is tried first; prettier is the fallback if it's missing
+			local prettier = { "prettierd", "prettier", stop_after_first = true }
 
 			return {
 				formatters_by_ft = {
 					lua = { "stylua" },
-					javascript = prettier_or_fallback,
-					javascriptreact = prettier_or_fallback,
-					typescript = prettier_or_fallback,
-					typescriptreact = prettier_or_fallback,
+					javascript = prettier,
+					javascriptreact = prettier,
+					typescript = prettier,
+					typescriptreact = prettier,
 					go = { "goimports", "gofumpt" },
 					python = { "ruff_organize_imports", "ruff_format" },
-					json = prettier_or_fallback,
-					yaml = prettier_or_fallback,
-					markdown = prettier_or_fallback,
-					html = prettier_or_fallback,
-					css = prettier_or_fallback,
-					scss = prettier_or_fallback,
+					json = prettier,
+					yaml = prettier,
+					markdown = prettier,
+					html = prettier,
+					css = prettier,
+					scss = prettier,
 				},
 				default_format_opts = {
 					lsp_format = "fallback",
 				},
 				format_on_save = function(bufnr)
 					return {
-						timeout_ms = 500,
+						timeout_ms = 1000,
 						lsp_format = "fallback",
 					}
 				end,
@@ -87,7 +82,8 @@ return {
 						prepend_args = get_prettier_args,
 					},
 					prettierd = {
-						prepend_args = get_prettier_args,
+						-- prettierd ignores --config; it only uses this when the project has no config
+						env = has_global_config and { PRETTIERD_DEFAULT_CONFIG = global_config } or nil,
 					},
 				},
 			}
@@ -132,14 +128,13 @@ return {
 				"goimports",
 				"gofumpt",
 				"golangci-lint",
-				"ruff",
+				-- ruff and angular-language-server are installed by mason-lspconfig (mason.lua)
 				"json-lsp",
 				"dockerfile-language-server",
 				"yaml-language-server",
 				"marksman",
 				"html-lsp",
 				"css-lsp",
-				{ "angular-language-server", version = "20.3.0" },
 			},
 			run_on_start = true,
 			start_delay = 3000,
