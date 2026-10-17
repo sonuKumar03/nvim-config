@@ -377,12 +377,7 @@ return {
 					end, { expr = true, buffer = ev.buf, desc = "LSP: Rename Symbol (Incremental)" })
 					map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
 					map("<leader>cd", vim.diagnostic.open_float, "Line Diagnostics")
-					map("[d", function()
-						vim.diagnostic.jump({ count = -1, float = true })
-					end, "Previous Diagnostic")
-					map("]d", function()
-						vim.diagnostic.jump({ count = 1, float = true })
-					end, "Next Diagnostic")
+					-- [d / ]d: built-in maps; float opens via jump.on_jump in options.lua
 
 					-- Telescope LSP bindings
 					map("grr", function()
