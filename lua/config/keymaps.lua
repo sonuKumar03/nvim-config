@@ -11,7 +11,6 @@ vim.keymap.set("n", "<leader>be", "<cmd>Neotree buffers<cr>", { desc = "Neo-tree
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "Buffers: New" })
 vim.keymap.set("n", "<leader>bh", "<cmd>bprevious<cr>", { desc = "Buffers: Previous" })
 vim.keymap.set("n", "<leader>bl", "<cmd>bnext<cr>", { desc = "Buffers: Next" })
-vim.keymap.set("n", "<leader>bc", function() Snacks.bufdelete() end, { desc = "Buffers: Close" })
 vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Trouble: Workspace Diagnostics" })
 vim.keymap.set("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Trouble: Buffer Diagnostics" })
 vim.keymap.set("n", "<leader>xe", "<cmd>Trouble diagnostics toggle filter.severity=vim.diagnostic.severity.ERROR<cr>", { desc = "Trouble: Workspace Errors" })

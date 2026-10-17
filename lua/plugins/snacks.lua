@@ -36,7 +36,7 @@ return {
     scratch = { enabled = false },
     terminal = { enabled = true },
     toggle = { enabled = true },
-    words = { enabled = true },
+    words = { enabled = false }, -- vim-illuminate handles reference highlighting
     zen = { enabled = false },
   },
   keys = {

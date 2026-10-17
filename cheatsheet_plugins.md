@@ -75,7 +75,6 @@ This cheatsheet covers the customized keymaps and usage for the plugins installe
 | `<leader>bp` | Pick Buffer | Pick a buffer directly by typing its visible overlay letter. |
 | `<leader>bd` | Delete Buffer | Delete the current active buffer safely without closing window splits. |
 | `<leader>bn` | New Buffer | Create a new blank file buffer. |
-| `<leader>bc` | Close Buffer (Raw) | Close the current buffer via raw `:bdelete` command. |
 | `<leader>bl` | Next Buffer (Raw) | Jump to the next open buffer via raw `:bnext` command. |
 | `<leader>bh` | Previous Buffer (Raw)| Jump to the previous buffer via raw `:bprevious` command. |
 
@@ -217,19 +216,7 @@ These keymaps are registered automatically on buffers where a Language Server is
 
 ---
 
-## 12. Notes / Obsidian Note-Taking
-| Keymap | Action | Description |
-| :--- | :--- | :--- |
-| `<leader>nn` | New Note | Create a new Obsidian note file. |
-| `<leader>ns` | Search Text | Fuzzy search for content/text inside all notes. |
-| `<leader>no` | Open in App | Open the active note in the Obsidian desktop application. |
-| `<leader>nt` | Today's Daily Note | Open or create today's daily journal note. |
-| `<leader>ny` | Yesterday's Daily Note | Open or create yesterday's daily journal note. |
-| `<leader>nf` | Follow Link | Follow/open the markdown hyperlink under the cursor. |
-| `<leader>ni` | Insert Template | Insert a custom note template (such as daily template). |
-| `<leader>nb` | Backlinks | View notes that link back to the current active note. |
-
-*   **Wiki-Link Completion**: Type `[[` inside any note to search and autocomplete links to other notes in your vault.
+## 12. Markdown
 *   **Markdown Snippets**: Type helpers like `tbl` (table), `link` (hyperlink), or `code` (code block) and press `Enter` to expand them. Use `Tab` to jump through the parameters.
 *   **Document LSP**: Runs `marksman` to provide auto-completions, lint headers, and enable header definition lookups.
 

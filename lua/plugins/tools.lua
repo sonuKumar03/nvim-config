@@ -9,7 +9,6 @@ return {
 				{ "<leader>b", group = "Buffers" },
 				{ "<leader>f", group = "Find" },
 				{ "<leader>g", group = "Git" },
-				{ "<leader>n", group = "Notes / Obsidian" },
 				{ "<leader>o", group = "Terminal" },
 				{ "<leader>p", group = "Projects" },
 				{ "<leader>q", group = "Session / Quit" },

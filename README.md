@@ -58,7 +58,7 @@ Need help remembering keys? Check out these detailed references:
 - `<leader>bp` interactively picks a buffer by overlay label
 - `<leader>bn` creates a new buffer
 - `<leader>bh` and `<leader>bl` move to previous/next buffers
-- `<leader>bc` closes the current buffer
+- `<leader>bd` closes the current buffer
 - `<leader>be` opens the Neo-tree buffers view
 
 ### Git
