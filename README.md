@@ -95,6 +95,18 @@ Need help remembering keys? Check out these detailed references:
 - `:LCP [name]` opens a Python scratch file
 - `:LCPR` runs the current Python file
 
+## Health Check
+
+Run after `:Lazy update` (or any config change) to catch breakage:
+
+```bash
+~/.config/nvim/scripts/check.sh
+```
+
+It starts Neovim headless and checks: clean startup, every plugin loads, `<cmd>` keymaps point to real
+commands, LSP/treesitter/formatter for TS, Lua and Python, TS go-to-definition, and deprecated API calls
+from this config (plugin deprecations are shown as warnings). Exits non-zero if anything fails.
+
 ## Notes
 
 - `lazy-lock.json` pins plugin versions.
