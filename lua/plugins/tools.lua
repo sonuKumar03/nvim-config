@@ -38,9 +38,27 @@ return {
 			options = { "buffers", "curdir", "tabpages", "winsize", "skiprtp" },
 		},
 		keys = {
-			{ "<leader>qs", function() require("persistence").load() end, desc = "Restore Session (Current Dir)" },
-			{ "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
-			{ "<leader>qd", function() require("persistence").stop() end, desc = "Stop Saving Session" },
+			{
+				"<leader>qs",
+				function()
+					require("persistence").load()
+				end,
+				desc = "Restore Session (Current Dir)",
+			},
+			{
+				"<leader>ql",
+				function()
+					require("persistence").load({ last = true })
+				end,
+				desc = "Restore Last Session",
+			},
+			{
+				"<leader>qd",
+				function()
+					require("persistence").stop()
+				end,
+				desc = "Stop Saving Session",
+			},
 		},
 	},
 
