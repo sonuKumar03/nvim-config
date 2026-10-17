@@ -46,8 +46,8 @@ local function run()
 	end
 
 	vim.cmd.write()
-	vim.cmd.botright("split")
-	vim.fn.termopen({ "python3", path }, { cwd = vim.fn.fnamemodify(path, ":h") })
+	vim.cmd("botright new")
+	vim.fn.jobstart({ "python3", path }, { term = true, cwd = vim.fn.fnamemodify(path, ":h") })
 	vim.cmd.startinsert()
 end
 

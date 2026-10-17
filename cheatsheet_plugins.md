@@ -104,12 +104,11 @@ These keymaps are registered automatically on buffers where a Language Server is
 | Keymap | Action | Description |
 | :--- | :--- | :--- |
 | `gd` | Go to Definition | Jump to where the symbol is defined. |
-| `gD` | Go to Declaration | Jump to where the symbol is declared. |
+| `gD` | Go to Declaration | Jump to the declaration (falls back to definition when the server has no declaration support, e.g. vtsls). |
 | `gr` | List References | List all files referencing this symbol. |
 | `gI` | Go to Implementation | Jump to interface implementations. |
 | `gy` | Type Definition | Jump to type definition. |
 | `grr` | References (Telescope) | Search references in a Telescope dialog. |
-| `grd` | Definition (Telescope) | Search definition in a Telescope dialog. |
 | `gri` | Implementation (Telescope)| Search implementations in Telescope. |
 | `grt` | Type Def (Telescope) | Search type definitions in Telescope. |
 | `gO` | Document Symbols | View all functions, classes, and variables in current file. |

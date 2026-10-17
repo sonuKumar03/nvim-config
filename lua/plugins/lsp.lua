@@ -341,7 +341,14 @@ return {
 					end
 
 					map("gd", vim.lsp.buf.definition, "Goto Definition")
-					map("gD", vim.lsp.buf.declaration, "Goto Declaration") -- handled by vtsls
+					-- vtsls has no textDocument/declaration; fall back to definition
+					map("gD", function()
+						if #vim.lsp.get_clients({ bufnr = ev.buf, method = "textDocument/declaration" }) > 0 then
+							vim.lsp.buf.declaration()
+						else
+							vim.lsp.buf.definition()
+						end
+					end, "Goto Declaration")
 					map("gr", function()
 						vim.lsp.buf.references(nil, {
 							on_list = function(options)
