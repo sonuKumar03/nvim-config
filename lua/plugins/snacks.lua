@@ -24,7 +24,6 @@ return {
     notifier = { enabled = false },
     profiler = { enabled = false },
     scroll = { enabled = true },
-    select = { enabled = true },
     statuscolumn = { enabled = true },
     -- Disable everything else explicitly
     git = { enabled = false },

@@ -13,13 +13,18 @@ return {
 				"markdown",
 				"markdown_inline",
 				"typescript",
+				"tsx",
 				"javascript",
+				"angular",
+				"python",
 				"go",
+				"bash",
 				"json",
 				"yaml",
 				"dockerfile",
 				"html",
 				"css",
+				"scss",
 			}
 
 			treesitter.setup()
@@ -52,10 +57,6 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		branch = "main",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		init = function()
-			-- Avoid conflicts with Neovim's built-in filetype textobject mappings.
-			vim.g.no_plugin_maps = true
-		end,
 		config = function()
 			local textobjects = require("nvim-treesitter-textobjects")
 

@@ -3,8 +3,7 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		config = true, -- Runs standard require("nvim-autopairs").setup() automatically
-		opts = {},
+		opts = {}, -- Runs require("nvim-autopairs").setup({}) automatically
 	},
 
 	-- Autotag: Automatically closes and renames XML/HTML/TSX/JSX tags dynamically
