@@ -243,10 +243,6 @@ return {
 					end,
 				},
 				jsonls = {
-					on_new_config = function(new_config)
-						new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-						vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
-					end,
 					settings = {
 						json = {
 							schemas = require("schemastore").json.schemas(),
@@ -256,10 +252,6 @@ return {
 				},
 				dockerls = {},
 				yamlls = {
-					on_new_config = function(new_config)
-						new_config.settings.yaml.schemas = new_config.settings.yaml.schemas or {}
-						vim.list_extend(new_config.settings.yaml.schemas, require("schemastore").yaml.schemas())
-					end,
 					settings = {
 						yaml = {
 							schemaStore = {
@@ -327,13 +319,16 @@ return {
 					-- Toggle inlay hints in insert mode to eliminate typing lag
 					if client and client:supports_method("textDocument/inlayHint", ev.buf) then
 						vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+						local group = vim.api.nvim_create_augroup("UserInlayHints" .. ev.buf, { clear = true })
 						vim.api.nvim_create_autocmd("InsertEnter", {
+							group = group,
 							buffer = ev.buf,
 							callback = function()
 								vim.lsp.inlay_hint.enable(false, { bufnr = ev.buf })
 							end,
 						})
 						vim.api.nvim_create_autocmd("InsertLeave", {
+							group = group,
 							buffer = ev.buf,
 							callback = function()
 								vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
@@ -391,9 +386,6 @@ return {
 					map("gri", function()
 						require("telescope.builtin").lsp_implementations()
 					end, "Goto Implementation (Telescope)")
-					map("grd", function()
-						require("telescope.builtin").lsp_definitions()
-					end, "Goto Definition (Telescope)")
 					map("gO", function()
 						require("telescope.builtin").lsp_document_symbols()
 					end, "Open Document Symbols (Telescope)")
